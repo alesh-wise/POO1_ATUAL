@@ -3,8 +3,10 @@
  * e o tempo necessário para percorrer uma dada trajetória considerando influências
  * externas como a velocidade do vento. A trajetória é definida por um vetor que
  * conecta dois pontos.
- * * @author Alexandre Guerreiro, 88489
- * * @version 24/02/2026
+ *
+ * @author Alexandre Guerreiro, 88489
+ * @version 24/02/2026
+ * @inv o vetor r não pode ser nulo.
  */
 public class AutoPilot {
 

@@ -23,11 +23,13 @@ public class Route {
             SegmentoReta temp = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
             Ponto intersect = temp.intersect(sg);
             if (intersect != null) {
-                IO.print(intersect + " ");
+                IO.print(intersect);
                 exit = true;
-            }
-            if (i == pontos.size() - 1) {
-                IO.print("\n");
+                if (i == pontos.size() - 1) {
+                    IO.print("\n");
+                } else {
+                    IO.print(" ");
+                }
             }
         }
         if (!exit) {

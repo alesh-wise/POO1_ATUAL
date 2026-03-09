@@ -18,17 +18,18 @@ public class Cliente {
         BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
         String[] pontos = entrada.readLine().split(" ");
         ArrayList<SegmentoReta> segmentos = new ArrayList<>();
-        for (int i = 0; i < pontos.length; i += 4) {
-            Ponto start = new Ponto(Double.parseDouble(pontos[i]), Double.parseDouble(pontos[i + 1]));
-            Ponto end = new Ponto(Double.parseDouble(pontos[i + 2]), Double.parseDouble(pontos[i + 3]));
+
+        for (int i = 2; i < pontos.length; i += 2) {
+            Ponto start = new Ponto(Double.parseDouble(pontos[i - 2]), Double.parseDouble(pontos[i - 1]));
+            Ponto end = new Ponto(Double.parseDouble(pontos[i]), Double.parseDouble(pontos[i + 1]));
             segmentos.add(new SegmentoReta(start, end));
         }
         Route rota = new Route(segmentos);
+        IO.println(String.format("%.2f", rota.comprimento()));
         pontos = entrada.readLine().split(" ");
         Ponto start = new Ponto(Double.parseDouble(pontos[0]), Double.parseDouble(pontos[1]));
         Ponto end = new Ponto(Double.parseDouble(pontos[2]), Double.parseDouble(pontos[3]));
-        SegmentoReta trajeto = new SegmentoReta(start, end);
-        System.out.println(trajeto.comprimento());
-        System.out.println(rota.comprimento());
+        SegmentoReta extremo = new SegmentoReta(start, end);
+        rota.intersect(extremo);
     }
 }

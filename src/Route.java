@@ -17,6 +17,18 @@ public class Route {
                 points.add(intersect);
             }
         }
+        if (points.isEmpty()) {
+            IO.println("null");
+        }
+        intersect_toString(points);
+    }
+
+    private void intersect_toString(ArrayList<Ponto> points) {
+        StringBuilder sb = new StringBuilder();
+        for (Ponto temp : points) {
+            sb.append(temp.toString());
+        }
+        System.out.println(sb.toString());
     }
 
     public double comprimento() {

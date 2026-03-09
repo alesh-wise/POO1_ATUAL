@@ -15,21 +15,18 @@ import java.util.ArrayList;
  */
 public class Cliente {
     public static void main() throws IOException {
-        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
-        String[] pontos = entrada.readLine().split(" ");
-        ArrayList<SegmentoReta> segmentos = new ArrayList<>();
-
-        for (int i = 2; i < pontos.length; i += 2) {
-            Ponto start = new Ponto(Double.parseDouble(pontos[i - 2]), Double.parseDouble(pontos[i - 1]));
-            Ponto end = new Ponto(Double.parseDouble(pontos[i]), Double.parseDouble(pontos[i + 1]));
-            segmentos.add(new SegmentoReta(start, end));
+        ArrayList<Ponto> pontos = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] linha = br.readLine().split(" ");
+        for (int i = 0; i < linha.length; i += 2) {
+            pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
         }
-        Route rota = new Route(segmentos);
-        IO.println(String.format("%.2f", rota.comprimento()));
-        pontos = entrada.readLine().split(" ");
-        Ponto start = new Ponto(Double.parseDouble(pontos[0]), Double.parseDouble(pontos[1]));
-        Ponto end = new Ponto(Double.parseDouble(pontos[2]), Double.parseDouble(pontos[3]));
-        SegmentoReta extremo = new SegmentoReta(start, end);
-        rota.intersect(extremo);
+        Route rota = new Route(pontos);
+        IO.println(rota.comprimento());
+        linha = br.readLine().split(" ");
+        Ponto start = new Ponto(Double.parseDouble(linha[0]), Double.parseDouble(linha[1]));
+        Ponto end = new Ponto(Double.parseDouble(linha[2]), Double.parseDouble(linha[3]));
+        SegmentoReta segv = new SegmentoReta(start, end);
+        rota.intersect(segv);
     }
 }

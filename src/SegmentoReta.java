@@ -100,9 +100,8 @@ public class SegmentoReta {
      * @return O {@code Ponto} representando o ponto de interseção se ele existir, caso contrario retorna null.
      * @see <a href="https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect"> StackOverflow</a>
      */
-    public Ponto intersect(Vetor v) {
+    public Ponto intersect(SegmentoReta segv) {
 
-        SegmentoReta segv = new SegmentoReta(new Ponto(0, 0), v);
 
         Ponto r = p2.subtracao(p1);
         Ponto s = segv.p2;
@@ -141,6 +140,12 @@ public class SegmentoReta {
 
         return null;
     }
+
+    public Ponto intersect(Vetor v) {
+        SegmentoReta segv = new SegmentoReta(new Ponto(0, 0), v);
+        return this.intersect(segv);
+    }
+
 
     /**
      * Retorna uma representação em formato de string do segmento de reta.

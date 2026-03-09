@@ -19,7 +19,6 @@ class AutoPilotTest {
         assertEquals(expected2.y(), auto2.speed(windspeed, time).y(), Ponto.tol);
     }
 
-
     public @Test
     void time() {
         AutoPilot auto = new AutoPilot(new Ponto(2, 2), new Ponto(2, 4));

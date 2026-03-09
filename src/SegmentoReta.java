@@ -158,6 +158,18 @@ public class SegmentoReta {
             return "sr(" + p2.toString() + "; " + p1.toString() + ")";
         }
     }
+
+    public Ponto getP1() {
+        return p1;
+    }
+
+    public Ponto getP2() {
+        return p2;
+    }
+
+    public Vetor getV1() {
+        return v1;
+    }
 }
 
 

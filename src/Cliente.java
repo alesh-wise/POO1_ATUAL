@@ -1,4 +1,7 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * A classe Cliente é responsável por fornecer um ponto de entrada para a execução
@@ -11,22 +14,21 @@ import java.util.Scanner;
  * @version 12/02/2026
  */
 public class Cliente {
-    public static void main() {
-        Scanner sc = new Scanner(System.in);
-        //Get start and finish points
-        Ponto start = new Ponto(sc.nextDouble(), sc.nextDouble());
-        Ponto finish = new Ponto(sc.nextDouble(), sc.nextDouble());
-        //Get wind speed and direction
-        Vetor w = new Vetor(sc.nextDouble(), sc.nextDouble());
-        //Get linear speed
-        double s = sc.nextDouble();
-        sc.close();
-        //Setup auto pilot and compute:
-        // i) desired time to reach the finish point
-        // ii) vectorial speed required
-        AutoPilot ap = new AutoPilot(start, finish);
-        double t = ap.time(w, s);
-        IO.println(String.format("%.2f", t));
-        IO.println(ap.speed(w, t));
+    public static void main() throws IOException {
+        BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+        String[] pontos = entrada.readLine().split(" ");
+        ArrayList<SegmentoReta> segmentos = new ArrayList<>();
+        for (int i = 0; i < pontos.length; i += 4) {
+            Ponto start = new Ponto(Double.parseDouble(pontos[i]), Double.parseDouble(pontos[i + 1]));
+            Ponto end = new Ponto(Double.parseDouble(pontos[i + 2]), Double.parseDouble(pontos[i + 3]));
+            segmentos.add(new SegmentoReta(start, end));
+        }
+        Route rota = new Route(segmentos);
+        pontos = entrada.readLine().split(" ");
+        Ponto start = new Ponto(Double.parseDouble(pontos[0]), Double.parseDouble(pontos[1]));
+        Ponto end = new Ponto(Double.parseDouble(pontos[2]), Double.parseDouble(pontos[3]));
+        SegmentoReta trajeto = new SegmentoReta(start, end);
+        System.out.println(trajeto.comprimento());
+        System.out.println(rota.comprimento());
     }
 }

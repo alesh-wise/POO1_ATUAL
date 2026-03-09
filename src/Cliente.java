@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * é feita através da leitura de dados do terminal.
  *
  * @author Alexandre Guerreiro, 88489
- * @version 12/02/2026
+ * @version 09/03/2026
  */
 public class Cliente {
     public static void main() throws IOException {
@@ -22,11 +22,12 @@ public class Cliente {
             pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
         }
         Route rota = new Route(pontos);
-        IO.println(rota.comprimento());
+        IO.print(rota.comprimento());
         linha = br.readLine().split(" ");
         Ponto start = new Ponto(Double.parseDouble(linha[0]), Double.parseDouble(linha[1]));
         Ponto end = new Ponto(Double.parseDouble(linha[2]), Double.parseDouble(linha[3]));
         SegmentoReta segv = new SegmentoReta(start, end);
         rota.intersect(segv);
+
     }
 }

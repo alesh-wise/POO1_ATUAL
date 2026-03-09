@@ -90,21 +90,32 @@ public class SegmentoReta {
         return vq.p_interno(vr) >= Ponto.tol && vq.p_interno(vr) <= vr.p_interno(vr);
     }
 
-
     /**
-     * Calcula o ponto de interseção, se existir, entre este segmento e um vetor.
-     * O cálculo envolve verificação de colinearidade, sobreposição ou interseção,
-     * dentro dos limites tanto do segmento quanto do vetor.
+     * Calcula o ponto de interseção entre o segmento de reta atual e outro segmento de reta.
+     * O método verifica se os dois segmentos se intersectam em um único ponto, se são colineares
+     * (e potencialmente se sobrepõem), ou se não se intersectam.
+     * <p>
+     * A lógica implementada para calcular a interseção segue os princípios dos vetores no plano
+     * bidimensional, verificando a orientação relativa das retas associadas aos segmentos.
      *
-     * @param v O vetor com o qual será calculada a interseção com o segmento atual.
-     * @return O {@code Ponto} representando o ponto de interseção se ele existir, caso contrario retorna null.
-     * @see <a href="https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect"> StackOverflow</a>
+     * <p>
+     * Casos considerados:
+     * - Se os segmentos são colineares e possuem sobreposição, o ponto de interseção pode ser
+     * um dos extremos de um dos segmentos.
+     * - Se os segmentos não são colineares, mas se intersectam em um único ponto dentro dos limites
+     * dos dois segmentos, este ponto é retornado.
+     * - Caso contrário, o método retorna {@code null}, indicando que os segmentos não se intersectam.
+     * </p>
+     *
+     * @param segv O outro segmento de reta a ser testado para calcular a interseção.
+     * @return Um {@code Ponto} representando o ponto de interseção, caso exista. Retorna {@code null}
+     * se os segmentos não se intersectam ou são colineares sem sobreposição.
      */
     public Ponto intersect(SegmentoReta segv) {
 
 
         Ponto r = p2.subtracao(p1);
-        Ponto s = segv.p2;
+        Ponto s = segv.p2.subtracao(segv.p1);
         Ponto qp = segv.p1.subtracao(p1);
 
         double numerador = qp.produtoVetorial(s);
@@ -141,6 +152,15 @@ public class SegmentoReta {
         return null;
     }
 
+    /**
+     * Calcula o ponto de interseção entre o segmento de reta atual e um vetor fornecido.
+     * O método transforma o vetor em um segmento de reta a partir do ponto de origem (0,0)
+     * e calcula o ponto de interseção através de sobreposição ou colinearidade, se existente.
+     *
+     * @param v O vetor usado para calcular a interseção com o segmento de reta atual.
+     * @return O {@code Ponto} representando o ponto de interseção, se existir.
+     * Retorna {@code null} caso não exista interseção.
+     */
     public Ponto intersect(Vetor v) {
         SegmentoReta segv = new SegmentoReta(new Ponto(0, 0), v);
         return this.intersect(segv);
@@ -162,18 +182,6 @@ public class SegmentoReta {
         } else {
             return "sr(" + p2.toString() + "; " + p1.toString() + ")";
         }
-    }
-
-    public Ponto getP1() {
-        return p1;
-    }
-
-    public Ponto getP2() {
-        return p2;
-    }
-
-    public Vetor getV1() {
-        return v1;
     }
 }
 

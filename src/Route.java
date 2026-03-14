@@ -87,30 +87,35 @@ public class Route {
             Ponto first = pontos.get(i - 1);
             Ponto second = pontos.get(i);
 
-            double a = first.y() - second.y();
-            double b = second.x() - first.x();
-            double c = (first.x() * second.y()) - (second.x() * first.y());
+            double Dx = second.x() - first.x();
+            double Dy = second.y() - first.y();
 
-            double a_resolvente = Math.pow(b / a, 2) + 1;
-            double b_resolvente = 2 * c * b / a - 2 * circle.getCentro().x() * b / a - 2 * circle.getCentro().y();
-            double c_resolvente = Math.pow(c / a, 2) - 2 * circle.getCentro().x() * c / a + Math.pow(circle.getCentro().x(), 2) + Math.pow(circle.getCentro().y(), 2) - Math.pow(circle.getRaio(), 2);
+            double Fx = first.x() - circle.getCentro().x();
+            double Fy = first.y() - circle.getCentro().y();
 
-            double discriminante = Math.pow(b_resolvente, 2) - 4 * a_resolvente * c_resolvente;
+            double a = (Dx * Dx) + (Dy * Dy);
+            double b = -2 * (Fx * Dx) - 2 * (Fy * Dy);
+            double c = (Fx * Fx) + (Fy * Fy) - Math.pow(circle.getRaio(), 2);
+
+            double discriminante = (b * b) - 4 * a * c;
+
             if (discriminante > 0) {
-                double x1 = ((1 - b_resolvente) + Math.sqrt(discriminante)) / (2 * a_resolvente);
-                double x2 = ((1 - b_resolvente) - Math.sqrt(discriminante)) / (2 * a_resolvente);
+                discriminante = Math.sqrt(discriminante);
 
-                double y1 = c / b - a * x1 / b;
-                double y2 = c / b - a * x2 / b;
-                pontosIntersect.add(new Ponto(x1, y1));
-                pontosIntersect.add(new Ponto(x2, y2));
-            }
-            if (discriminante == 0) {
-                double x1 = (1 - b_resolvente) / (2 * a_resolvente);
-                double y1 = c / b - a * x1 / b;
-                pontosIntersect.add(new Ponto(x1, y1));
-            }
+                double t1 = (-b + discriminante) / (2 * a);
+                if (t1 >= 0 && t1 <= 1) {
+                    double interx = first.x() + t1 * Dx;
+                    double intery = first.y() + t1 * Dy;
+                    pontosIntersect.add(new Ponto(interx, intery));
+                }
 
+                double t2 = (-b - discriminante) / (2 * a);
+                if (t2 >= 0 && t2 <= 1 && discriminante > 0) {
+                    double interx = first.x() + t2 * Dx;
+                    double intery = first.y() + t2 * Dy;
+                    pontosIntersect.add(new Ponto(interx, intery));
+                }
+            }
         }
         printPoints(pontosIntersect);
     }

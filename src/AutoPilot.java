@@ -5,7 +5,7 @@
  * conecta dois pontos.
  *
  * @author Alexandre Guerreiro, 88489
- * @version 24/02/2026
+ * @version 10/03/2026
  * @inv o vetor r não pode ser nulo.
  */
 public class AutoPilot {
@@ -18,6 +18,8 @@ public class AutoPilot {
      *
      * @param a O ponto inicial da trajetória.
      * @param b O ponto final da trajetória.
+     * @pre a e b devem ser instâncias validas do tipo Ponto
+     * @post uma instância valida do tipo AutoPilot
      */
     public AutoPilot(Ponto a, Ponto b) {
         this.r = new Vetor(b.x() - a.x(), b.y() - a.y());
@@ -31,6 +33,8 @@ public class AutoPilot {
      * @param time      A duração do tempo sobre o qual a velocidade do objeto é calculada, como um double.
      * @return Um {@code Vetor} representando o vetor velocidade do objeto após considerar
      * a velocidade do vento e o intervalo de tempo especificado.
+     * @pre windSpeed deve ser uma instância valida do tipo Vetor e time >0
+     * @post retorna uma nova instância do tipo Vetor que representa a velocidade resultante.
      */
     public Vetor speed(Vetor windSpeed, double time) {
         return r.sub(windSpeed).mult(1 / time);
@@ -43,6 +47,8 @@ public class AutoPilot {
      * @param windSpeed   Um {@code Vetor} representando a velocidade do vento que atua contra o objeto.
      * @param linearSpeed Um {@code double} representando a velocidade linear do objeto.
      * @return Um {@code double} representando o tempo necessário para completar a trajetória.
+     * @pre windSpeed deve ser uma instância valida do tipo Vetor e linear >0
+     * @pro retorna um valor double >0 que representa o tempo necessario para completar a viagem.
      */
     public double time(Vetor windSpeed, double linearSpeed) {
         return r.sub(windSpeed).modulo() / linearSpeed;

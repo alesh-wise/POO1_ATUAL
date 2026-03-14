@@ -17,8 +17,8 @@ public class Route {
      *
      * @param pontos Uma lista de objetos {@code Ponto} que representam os pontos sequenciais
      *               que compõem a rota.
-     * @pre ArrayList pontos não vazio
-     * @post Uma instância valida de Route
+     * @pre ArrayList pontos com size >=2
+     * @post Uma instância valida de Route.
      */
     Route(ArrayList<Ponto> pontos) {
         this.pontos = pontos;
@@ -31,11 +31,10 @@ public class Route {
      *
      * @param sg O {@code SegmentoReta} com o qual os segmentos da rota serão
      *           testados para interseção.
-     * @pre sg valido
-     *
+     * @pre sg deve ser uma instância valida de SegmentoReta.
+     * @post Imprime na consola os pontos separados por espaço, ou "null" caso não existam interseções.
      */
     public void intersect(SegmentoReta sg) {
-
         boolean exit = false;
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
 
@@ -58,16 +57,58 @@ public class Route {
             }
             IO.print("\n");
         }
-
     }
 
-
+    /**
+     * Calcula o comprimento total da rota representada pela lista de pontos {@code pontos}.
+     * O comprimento é calculado como a soma das distâncias Euclidianas entre pontos consecutivos na lista.
+     *
+     * @return O comprimento total da rota.
+     * @post Retorna um valor double >=0 correspondente ao comprimento da rota.
+     */
     public double comprimento() {
         double comprimento = 0;
         for (int i = 1; i < pontos.size(); i++) {
             comprimento += pontos.get(i - 1).distance_to(pontos.get(i));
         }
         return comprimento;
+    }
+
+
+    public void intersect(Poligono p) {
+
+        ArrayList<Ponto> pontosIntersect = new ArrayList<>();
+        for (int i = 1; i < pontos.size(); i++) {
+            SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+            for (int j = 1; i < p.vertices().length; j++) {
+                Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j - 1], p.vertices()[j]));
+                if (intersecao != null) {
+                    pontosIntersect.add(intersecao);
+                }
+            }
+        }
+        if (pontosIntersect.isEmpty()) {
+            IO.println("null");
+        } else {
+            for (int i = 0; i < pontosIntersect.size(); i++) {
+                IO.print(pontosIntersect.get(i).toString());
+                if (i == pontosIntersect.size() - 1) {
+                    IO.println("\n");
+                } else {
+                    IO.print(" ");
+                }
+            }
+
+        }
+    }
+
+    public void intersect(Circulo c) {
+
+        ArrayList<Ponto> pontos = new ArrayList<>();
+        for (int i = 1; i < pontos.size(); i++) {
+            SegmentoReta sg = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+
+        }
     }
 
 }

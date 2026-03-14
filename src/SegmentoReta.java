@@ -21,6 +21,9 @@ public class SegmentoReta {
      * @param p1 O ponto inicial do segmento.
      * @param v1 O vetor que define a direção e magnitude do ponto inicial
      *           até o ponto final do segmento.
+     * @pre p1 deve ser uma instância valida do tipo Ponto
+     * @pre v1 deve ser uma instância valido do tipo Vetor
+     * @post Uma instância valida do tipo SegmentoReta
      */
     SegmentoReta(Ponto p1, Vetor v1) {
         this(p1, new Ponto(p1.x() + v1.x(), p1.y() + v1.y()));
@@ -34,6 +37,8 @@ public class SegmentoReta {
      *
      * @param p1 O ponto inicial do segmento de reta.
      * @param p2 O ponto final do segmento de reta.
+     * @pre p1 e p2 devem ser instância validas do tipo Ponto e diferentes
+     * @post Uma instância valida do tipo SegmentoReta
      */
     SegmentoReta(Ponto p1, Ponto p2) {
         this.p1 = p1;
@@ -50,6 +55,9 @@ public class SegmentoReta {
      * <p>
      * Este método é utilizado para garantir que o segmento de reta seja válido, uma vez
      * que um segmento de reta formado por dois pontos idênticos não é definido.
+     *
+     * @pre p1 e p2 devem estar inicializados
+     * @post Caso os pontos sejam iguais, a execução do programa é interrompida
      */
     private void check() {
         if (p1.equals(p2)) {
@@ -64,6 +72,7 @@ public class SegmentoReta {
      * ao segmento de reta.
      *
      * @return O comprimento do segmento de reta.
+     * @post retorna um valor double >= 0 que representa o comprimento do segmento
      */
     public double comprimento() {
         return this.v1.modulo();
@@ -76,13 +85,15 @@ public class SegmentoReta {
      *
      * @param p O ponto a ser verificado.
      * @return true se o ponto estiver dentro do segmento de reta, false caso contrário.
+     * @pre p deve ser uma instância valida do tipo Ponto
+     * @post retorna true se p pertencer ao segmento, caso contrario falso
      */
-    private boolean noSegmento(Ponto p) {
+    public boolean noSegmento(Ponto p) {
         Ponto r = p2.subtracao(p1);
         Ponto q = p.subtracao(p1);
 
 
-        if (Math.abs(r.produtoVetorial(q)) > Ponto.tol) return false; //opcional porque o metodo intersect já verifica
+        if (Math.abs(r.produtoVetorial(q)) > Ponto.tol) return false;
 
         Vetor vq = new Vetor(q);
         Vetor vr = new Vetor(r);
@@ -110,6 +121,8 @@ public class SegmentoReta {
      * @param segv O outro segmento de reta a ser testado para calcular a interseção.
      * @return Um {@code Ponto} representando o ponto de interseção, caso exista. Retorna {@code null}
      * se os segmentos não se intersectam ou são colineares sem sobreposição.
+     * @pre segv deve ser yma instância valida de SegmentoReta
+     * @post retorna uma nova instância valida de Ponto correspondente as coordenadas de interseção ou null, caso não se intersetem
      */
     public Ponto intersect(SegmentoReta segv) {
 
@@ -160,6 +173,8 @@ public class SegmentoReta {
      * @param v O vetor usado para calcular a interseção com o segmento de reta atual.
      * @return O {@code Ponto} representando o ponto de interseção, se existir.
      * Retorna {@code null} caso não exista interseção.
+     * @pre v deve ser uma instância valida de vetor
+     * @post retorna uma nova instância valida de Ponto correspondente as coordenadas de interseção ou null, caso não se intersetem
      */
     public Ponto intersect(Vetor v) {
         SegmentoReta segv = new SegmentoReta(new Ponto(0, 0), v);
@@ -175,6 +190,7 @@ public class SegmentoReta {
      *
      * @return Uma string representando o segmento de reta, organizada pelos
      * pontos p1 e p2 em ordem de distância crescente em relação à origem.
+     * @post retorna uma String com o formato "sr(A; B)" em que o ponto mais proximo da origem, fica em primeiro.
      */
     public String toString() {
         if (p1.distance_to(new Ponto(0, 0)) < p2.distance_to(new Ponto(0, 0))) {

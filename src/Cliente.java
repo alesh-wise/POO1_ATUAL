@@ -4,11 +4,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * A classe Cliente é responsável por fornecer um ponto de entrada para a execução
- * do programa. Nesta classe, são criados objetos de tipos definidos no domínio do
- * problema, como Ponto, Vetor e SegmentoReta. Com base nas entradas do utilizador,
- * realiza-se o cálculo de interseção entre um vetor e um segmento de reta. A interação
- * é feita através da leitura de dados do terminal.
+ * A classe Cliente é responsável por receber a entrada do usuário via console,
+ * processar os dados para criar uma rota (Route) composta por pontos (Ponto),
+ * calcular o comprimento total da rota e determinar interseções entre a rota e
+ * um segmento de reta (SegmentoReta).
+ * <p>
+ * A classe processa input do usuário para construir objetos e utiliza os métodos
+ * de outras classes associadas como Ponto, SegmentoReta e Route para realizar
+ * cálculos e exibir os resultados no console.
  *
  * @author Alexandre Guerreiro, 88489
  * @version 09/03/2026
@@ -22,13 +25,10 @@ public class Cliente {
             pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
         }
         Route rota = new Route(pontos);
-        IO.println(String.format("%.2f", rota.comprimento()));
         linha = br.readLine().split(" ");
-        Ponto start = new Ponto(Double.parseDouble(linha[0]), Double.parseDouble(linha[1]));
-        Ponto end = new Ponto(Double.parseDouble(linha[2]), Double.parseDouble(linha[3]));
-        SegmentoReta segv = new SegmentoReta(start, end);
-        rota.intersect(segv);
-        
-
+        pontos = new ArrayList<>();
+        for (int i = 0; i < linha.length; i += 2) {
+            pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
+        }
     }
 }

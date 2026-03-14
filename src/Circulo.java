@@ -6,4 +6,12 @@ public class Circulo {
         this.centro = centro;
         this.raio = raio;
     }
+
+    Ponto getCentro() {
+        return centro;
+    }
+
+    double getRaio() {
+        return raio;
+    }
 }

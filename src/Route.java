@@ -35,7 +35,7 @@ public class Route {
      * @post Imprime na consola os pontos separados por espaço, ou "null" caso não existam interseções.
      */
     public void intersect(SegmentoReta sg) {
-        boolean exit = false;
+
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
 
         for (int i = 1; i < pontos.size(); i++) {
@@ -43,20 +43,10 @@ public class Route {
             Ponto intersect = temp.intersect(sg);
             if (intersect != null) {
                 pontosIntersect.add(intersect);
-                exit = true;
+
             }
         }
-        if (!exit) {
-            IO.println("null");
-        } else {
-            for (int i = 0; i < pontosIntersect.size(); i++) {
-                IO.print(pontosIntersect.get(i).toString());
-                if (i < pontosIntersect.size() - 1) {
-                    IO.print(" ");
-                }
-            }
-            IO.print("\n");
-        }
+        printPoints(pontosIntersect);
     }
 
     /**
@@ -80,19 +70,58 @@ public class Route {
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
         for (int i = 1; i < pontos.size(); i++) {
             SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-            for (int j = 1; i < p.vertices().length; j++) {
+            for (int j = 1; j < p.vertices().length; j++) {
                 Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j - 1], p.vertices()[j]));
                 if (intersecao != null) {
                     pontosIntersect.add(intersecao);
                 }
             }
         }
-        if (pontosIntersect.isEmpty()) {
+        printPoints(pontosIntersect);
+    }
+
+    public void intersect(Circulo circle) {
+
+        ArrayList<Ponto> pontosIntersect = new ArrayList<>();
+        for (int i = 1; i < pontos.size(); i++) {
+            Ponto first = pontos.get(i - 1);
+            Ponto second = pontos.get(i);
+
+            double a = first.y() - second.y();
+            double b = second.x() - first.x();
+            double c = (first.x() * second.y()) - (second.x() * first.y());
+
+            double a_resolvente = Math.pow(b / a, 2) + 1;
+            double b_resolvente = 2 * c * b / a - 2 * circle.getCentro().x() * b / a - 2 * circle.getCentro().y();
+            double c_resolvente = Math.pow(c / a, 2) - 2 * circle.getCentro().x() * c / a + Math.pow(circle.getCentro().x(), 2) + Math.pow(circle.getCentro().y(), 2) - Math.pow(circle.getRaio(), 2);
+
+            double discriminante = Math.pow(b_resolvente, 2) - 4 * a_resolvente * c_resolvente;
+            if (discriminante > 0) {
+                double x1 = ((1 - b_resolvente) + Math.sqrt(discriminante)) / (2 * a_resolvente);
+                double x2 = ((1 - b_resolvente) - Math.sqrt(discriminante)) / (2 * a_resolvente);
+
+                double y1 = c / b - a * x1 / b;
+                double y2 = c / b - a * x2 / b;
+                pontosIntersect.add(new Ponto(x1, y1));
+                pontosIntersect.add(new Ponto(x2, y2));
+            }
+            if (discriminante == 0) {
+                double x1 = (1 - b_resolvente) / (2 * a_resolvente);
+                double y1 = c / b - a * x1 / b;
+                pontosIntersect.add(new Ponto(x1, y1));
+            }
+
+        }
+        printPoints(pontosIntersect);
+    }
+
+    public void printPoints(ArrayList<Ponto> pontos) {
+        if (pontos.isEmpty()) {
             IO.println("null");
         } else {
-            for (int i = 0; i < pontosIntersect.size(); i++) {
-                IO.print(pontosIntersect.get(i).toString());
-                if (i == pontosIntersect.size() - 1) {
+            for (int i = 0; i < pontos.size(); i++) {
+                IO.print(pontos.get(i).toString());
+                if (i == pontos.size() - 1) {
                     IO.println("\n");
                 } else {
                     IO.print(" ");
@@ -100,15 +129,7 @@ public class Route {
             }
 
         }
-    }
 
-    public void intersect(Circulo c) {
-
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 1; i < pontos.size(); i++) {
-            SegmentoReta sg = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-
-        }
     }
 
 }

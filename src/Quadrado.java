@@ -21,10 +21,10 @@ public class Quadrado extends Poligono {
             System.exit(0);
         }
         SegmentoReta aresta1 = new SegmentoReta(vertices[0], vertices[1]);
-        SegmentoReta aresta2 = new SegmentoReta(vertices[2], vertices[3]);
-        SegmentoReta aresta3 = new SegmentoReta(vertices[3], vertices[4]);
-        SegmentoReta aresta4 = new SegmentoReta(vertices[4], vertices[5]);
-        if ((aresta1.comprimento() != aresta2.comprimento()) || (aresta1.comprimento() != aresta4.comprimento()) || aresta3.comprimento() != aresta4.comprimento()) {
+        SegmentoReta aresta2 = new SegmentoReta(vertices[1], vertices[2]);
+        SegmentoReta aresta3 = new SegmentoReta(vertices[2], vertices[3]);
+        SegmentoReta aresta4 = new SegmentoReta(vertices[3], vertices[4]);
+        if ((aresta1.comprimento() != aresta2.comprimento()) || (aresta1.comprimento() != aresta3.comprimento()) || aresta1.comprimento() != aresta4.comprimento()) {
             IO.println("Quadrado.iv");
             System.exit(0);
         }

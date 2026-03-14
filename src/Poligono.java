@@ -20,7 +20,7 @@ public class Poligono {
     public double perimetro() {
         double perimetro = 0;
         for (int i = 1; i < vertices.length; i++) {
-            perimetro += vertices[i - 1].distance_to(vertices[1]);
+            perimetro += vertices[i - 1].distance_to(vertices[i]);
         }
         return perimetro;
     }

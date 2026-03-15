@@ -12,7 +12,9 @@ public class Triangulo extends Poligono {
             IO.println("Triangulo.iv");
             System.exit(0);
         }
-        double det = vertices[0].x() * vertices[1].y() + vertices[0].y() * vertices[2].x() + vertices[1].x() * vertices[2].y() - (vertices[1].y() * vertices[2].x() + vertices[0].x() * vertices[2].y() + vertices[0].y() * vertices[2].x());
+        double det = vertices[0].x() * (vertices[1].y() - vertices[2].y()) +
+                vertices[1].x() * (vertices[2].y() - vertices[0].y()) +
+                vertices[2].x() * (vertices[0].y() - vertices[1].y());
         if (Math.abs(det) < Ponto.tol) {
             IO.println("Triangulo.iv");
             System.exit(0);

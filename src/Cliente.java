@@ -25,10 +25,25 @@ public class Cliente {
             pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
         }
         Route rota = new Route(pontos);
-        linha = br.readLine().split(" ");
-        pontos = new ArrayList<>();
-        for (int i = 0; i < linha.length; i += 2) {
-            pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
-        }
+        Circulo c = new Circulo(new Ponto(0, 0), 5);
+        ArrayList<Ponto> pontosIntersect = rota.intersect(c);
     }
+
+    public void printPoints(ArrayList<Ponto> pontos) {
+        if (pontos.isEmpty()) {
+            IO.println("null");
+        } else {
+            for (int i = 0; i < pontos.size(); i++) {
+                IO.print(pontos.get(i).toString());
+                if (i == pontos.size() - 1) {
+                    IO.println("\n");
+                } else {
+                    IO.print(" ");
+                }
+            }
+
+        }
+
+    }
+
 }

@@ -34,7 +34,7 @@ public class Route {
      * @pre sg deve ser uma instância valida de SegmentoReta.
      * @post Imprime na consola os pontos separados por espaço, ou "null" caso não existam interseções.
      */
-    public void intersect(SegmentoReta sg) {
+    public ArrayList<Ponto> intersect(SegmentoReta sg) {
 
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
 
@@ -46,7 +46,7 @@ public class Route {
 
             }
         }
-        printPoints(pontosIntersect);
+        return pontosIntersect;
     }
 
     /**
@@ -65,7 +65,7 @@ public class Route {
     }
 
 
-    public void intersect(Poligono p) {
+    public ArrayList<Ponto> intersect(Poligono p) {
 
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
         for (int i = 1; i < pontos.size(); i++) {
@@ -77,64 +77,20 @@ public class Route {
                 }
             }
         }
-        printPoints(pontosIntersect);
+        return pontosIntersect;
     }
 
-    public void intersect(Circulo circle) {
+    public ArrayList<Ponto> intersect(Circulo circle) {
 
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
         for (int i = 1; i < pontos.size(); i++) {
-            Ponto first = pontos.get(i - 1);
-            Ponto second = pontos.get(i);
-
-            double Dx = second.x() - first.x();
-            double Dy = second.y() - first.y();
-
-            double Fx = first.x() - circle.getCentro().x();
-            double Fy = first.y() - circle.getCentro().y();
-
-            double a = (Dx * Dx) + (Dy * Dy);
-            double b = -2 * (Fx * Dx) - 2 * (Fy * Dy);
-            double c = (Fx * Fx) + (Fy * Fy) - Math.pow(circle.getRaio(), 2);
-
-            double discriminante = (b * b) - 4 * a * c;
-
-            if (discriminante > 0) {
-                discriminante = Math.sqrt(discriminante);
-
-                double t1 = (-b + discriminante) / (2 * a);
-                if (t1 >= 0 && t1 <= 1) {
-                    double interx = first.x() + t1 * Dx;
-                    double intery = first.y() + t1 * Dy;
-                    pontosIntersect.add(new Ponto(interx, intery));
-                }
-
-                double t2 = (-b - discriminante) / (2 * a);
-                if (t2 >= 0 && t2 <= 1 && discriminante > 0) {
-                    double interx = first.x() + t2 * Dx;
-                    double intery = first.y() + t2 * Dy;
-                    pontosIntersect.add(new Ponto(interx, intery));
-                }
+            SegmentoReta segRota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+            ArrayList<Ponto> temp = segRota.intersect(circle);
+            if (temp != null) {
+                pontosIntersect.addAll(temp);
             }
         }
-        printPoints(pontosIntersect);
-    }
-
-    public void printPoints(ArrayList<Ponto> pontos) {
-        if (pontos.isEmpty()) {
-            IO.println("null");
-        } else {
-            for (int i = 0; i < pontos.size(); i++) {
-                IO.print(pontos.get(i).toString());
-                if (i == pontos.size() - 1) {
-                    IO.println("\n");
-                } else {
-                    IO.print(" ");
-                }
-            }
-
-        }
-
+        return pontosIntersect;
     }
 
 }

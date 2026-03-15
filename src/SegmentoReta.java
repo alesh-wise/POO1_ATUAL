@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A classe SegmentoReta representa um segmento de reta em um plano bidimensional.
  * Ela pode ser definida através de dois pontos ou por um ponto inicial e um vetor.
@@ -181,6 +183,40 @@ public class SegmentoReta {
         return this.intersect(segv);
     }
 
+    public ArrayList<Ponto> intersect(Circulo circle) {
+        ArrayList<Ponto> intersecoes = new ArrayList<>();
+
+        Vetor d = this.v1;
+
+        Vetor f = new Vetor(p1.subtracao(circle.getCentro()));
+
+        double a = d.p_interno(d);
+        double b = 2 * f.p_interno(d);
+        double c = f.p_interno(f) - Math.pow(circle.getRaio(), 2);
+
+        double discriminante = (b * b) - 4 * a * c;
+        if (a == 0) {
+            return null;
+        }
+        if (discriminante >= 0) {
+            discriminante = Math.sqrt(discriminante);
+
+            double t1 = (-b + discriminante) / (2 * a);
+            if (t1 >= 0 && t1 <= 1) {
+                double interx = p1.x() + t1 * d.x();
+                double intery = p1.y() + t1 * d.y();
+                intersecoes.add(new Ponto(interx, intery));
+            }
+
+            double t2 = (-b - discriminante) / (2 * a);
+            if (t2 >= 0 && t2 <= 1 && discriminante > 0) {
+                double interx = p1.x() + t2 * d.x();
+                double intery = p1.y() + t2 * d.y();
+                intersecoes.add(new Ponto(interx, intery));
+            }
+        }
+        return intersecoes;
+    }
 
     /**
      * Retorna uma representação em formato de string do segmento de reta.

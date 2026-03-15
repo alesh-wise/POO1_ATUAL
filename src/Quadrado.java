@@ -1,5 +1,6 @@
 public class Quadrado extends Poligono {
 
+
     /**
      * Construtor para a classe Quadrado, que representa um polígono quadrado no plano cartesiano.
      * Inicializa o quadrado com base numa lista de vértices fornecida.
@@ -23,7 +24,7 @@ public class Quadrado extends Poligono {
         SegmentoReta aresta1 = new SegmentoReta(vertices[0], vertices[1]);
         SegmentoReta aresta2 = new SegmentoReta(vertices[1], vertices[2]);
         SegmentoReta aresta3 = new SegmentoReta(vertices[2], vertices[3]);
-        SegmentoReta aresta4 = new SegmentoReta(vertices[3], vertices[4]);
+        SegmentoReta aresta4 = new SegmentoReta(vertices[3], vertices[0]);
         if ((aresta1.comprimento() != aresta2.comprimento()) || (aresta1.comprimento() != aresta3.comprimento()) || aresta1.comprimento() != aresta4.comprimento()) {
             IO.println("Quadrado.iv");
             System.exit(0);

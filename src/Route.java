@@ -65,30 +65,29 @@ public class Route {
     }
 
 
-    public ArrayList<Ponto> intersect(Poligono p) {
-
+    public ArrayList<Ponto> intersect(FiguraG fig) {
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
-        for (int i = 1; i < pontos.size(); i++) {
-            SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-            for (int j = 1; j < p.vertices().length; j++) {
-                Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j - 1], p.vertices()[j]));
-                if (intersecao != null) {
-                    pontosIntersect.add(intersecao);
+        if (fig instanceof Poligono p) {
+            pontosIntersect = new ArrayList<>();
+            for (int i = 1; i < pontos.size(); i++) {
+                SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+                for (int j = 1; j < p.vertices().length; j++) {
+                    Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j - 1], p.vertices()[j]));
+                    if (intersecao != null) {
+                        pontosIntersect.add(intersecao);
+                    }
                 }
             }
-        }
-        return pontosIntersect;
-    }
-
-    public ArrayList<Ponto> intersect(Circulo circle) {
-
-        ArrayList<Ponto> pontosIntersect = new ArrayList<>();
-        for (int i = 1; i < pontos.size(); i++) {
-            SegmentoReta segRota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-            ArrayList<Ponto> temp = segRota.intersect(circle);
-            if (temp != null) {
-                pontosIntersect.addAll(temp);
+        } else if (fig instanceof Circulo circle) {
+            pontosIntersect = new ArrayList<>();
+            for (int i = 1; i < pontos.size(); i++) {
+                SegmentoReta segRota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+                ArrayList<Ponto> temp = segRota.intersect(circle);
+                if (temp != null) {
+                    pontosIntersect.addAll(temp);
+                }
             }
+
         }
         return pontosIntersect;
     }

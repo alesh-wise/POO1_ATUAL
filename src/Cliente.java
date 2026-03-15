@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A classe Cliente é responsável por receber a entrada do usuário via console,
@@ -25,11 +26,34 @@ public class Cliente {
             pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
         }
         Route rota = new Route(pontos);
-        Circulo c = new Circulo(new Ponto(0, 0), 5);
-        ArrayList<Ponto> pontosIntersect = rota.intersect(c);
+        linha = br.readLine().split(" ");
+
+        FiguraG fig = null;
+        String c = linha[0];
+
+        fig = switch (c) {
+            case "P" -> new Poligono(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+            case "S" -> new Quadrado(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+            case "R" -> new Retangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+            case "T" -> new Triangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+            case "C" ->
+                    new Circulo(new Ponto(Double.parseDouble(linha[1]), Double.parseDouble(linha[2])), Double.parseDouble(linha[3]));
+            default -> fig;
+        };
+        pontos = rota.intersect(fig);
+        printPoints(pontos);
+
     }
 
-    public void printPoints(ArrayList<Ponto> pontos) {
+    public static Ponto[] vertices(String[] linha) {
+        Ponto[] vertices = new Ponto[linha.length / 2];
+        for (int i = 0; i < linha.length; i += 2) {
+            vertices[i / 2] = new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1]));
+        }
+        return vertices;
+    }
+
+    public static void printPoints(ArrayList<Ponto> pontos) {
         if (pontos.isEmpty()) {
             IO.println("null");
         } else {

@@ -1,4 +1,4 @@
-public class Poligono {
+public class Poligono extends FiguraG {
     private Ponto[] vertices;
 
 

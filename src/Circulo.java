@@ -1,4 +1,4 @@
-public class Circulo {
+public class Circulo extends FiguraG {
     private Ponto centro;
     private double raio;
 

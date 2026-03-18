@@ -24,30 +24,6 @@ public class Route {
         this.pontos = pontos;
     }
 
-    /**
-     * Identifica e processa os pontos de interseção entre os segmentos da rota e um
-     * dado {@code SegmentoReta}. O resultado é impresso, mostrando os pontos de
-     * interseção ou indicando que não há interseções.
-     *
-     * @param sg O {@code SegmentoReta} com o qual os segmentos da rota serão
-     *           testados para interseção.
-     * @pre sg deve ser uma instância valida de SegmentoReta.
-     * @post Imprime na consola os pontos separados por espaço, ou "null" caso não existam interseções.
-     */
-    public ArrayList<Ponto> intersect(SegmentoReta sg) {
-
-        ArrayList<Ponto> pontosIntersect = new ArrayList<>();
-
-        for (int i = 1; i < pontos.size(); i++) {
-            SegmentoReta temp = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-            Ponto intersect = temp.intersect(sg);
-            if (intersect != null) {
-                pontosIntersect.add(intersect);
-
-            }
-        }
-        return pontosIntersect;
-    }
 
     /**
      * Calcula o comprimento total da rota representada pela lista de pontos {@code pontos}.
@@ -64,10 +40,31 @@ public class Route {
         return comprimento;
     }
 
-
+    /**
+     * Calcula e retorna os pontos de interseção entre a rota (composta por pontos sequenciais)
+     * e uma figura geométrica fornecida. A figura geométrica pode ser um segmento de reta, um polígono ou um círculo.
+     * Dependendo do tipo da figura geométrica, uma lógica apropriada de interseção é aplicada.
+     *
+     * @param fig A figura geométrica com a qual os pontos de interseção da rota serão calculados.
+     *            Pode ser uma instância de {@code SegmentoReta}, {@code Poligono} ou {@code Circulo}.
+     * @return Uma {@code ArrayList} de objetos {@code Ponto} que representam os pontos de interseção.
+     * Se não houver interseções, uma lista vazia será retornada.
+     * @pre A figura geométrica passada em fig deve ser uma instância válida de uma das classes mencionadas.
+     * @post Retorna uma lista contendo os pontos de interseção ou uma lista vazia se não houver interseções.
+     */
     public ArrayList<Ponto> intersect(FiguraG fig) {
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
-        if (fig instanceof Poligono p) {
+        if (fig instanceof SegmentoReta sg) {
+            for (int i = 1; i < pontos.size(); i++) {
+                SegmentoReta temp = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+                Ponto intersect = temp.intersect(sg);
+                if (intersect != null) {
+                    pontosIntersect.add(intersect);
+
+                }
+            }
+            return pontosIntersect;
+        } else if (fig instanceof Poligono p) {
             pontosIntersect = new ArrayList<>();
             for (int i = 1; i < pontos.size(); i++) {
                 SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));

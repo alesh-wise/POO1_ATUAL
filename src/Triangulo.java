@@ -1,3 +1,10 @@
+/**
+ * A classe Triangulo representa um polígono de três lados no plano cartesiano.
+ * Ela estende a classe Poligono, garantindo que a estrutura obedeça às restrições geométricas de um triângulo.
+ * Todos os vértices fornecidos devem formar efetivamente um triângulo não degenerado.
+ *
+ * @author Alexandre Guerreiro, a88489
+ */
 public class Triangulo extends Poligono {
     /**
      * Construtor para a classe Triangulo, que representa um polígono triangulo no plano cartesiano.
@@ -5,7 +12,8 @@ public class Triangulo extends Poligono {
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do quadrado.
      * @inv pontos deve ter size =3
-     *
+     * @pre os pontos devem estar ordenados
+     * @post uma instância valida de Triangulo
      */
     Triangulo(Ponto[] vertices) {
         if (vertices.length != 3) {

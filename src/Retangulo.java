@@ -1,3 +1,10 @@
+/**
+ * A classe {@code Retangulo} representa um retângulo como uma forma geométrica com quatro vértices,
+ * estendendo as funcionalidades da classe {@code Poligono}.
+ * Esta implementação verifica se os vértices fornecidos formam um retângulo válido antes de instanciá-lo.
+ *
+ * @author Alexandre Guerreiro, a88489
+ */
 public class Retangulo extends Poligono {
     /**
      * Construtor para criar uma instância de um Retângulo, que é um polígono formado
@@ -5,7 +12,9 @@ public class Retangulo extends Poligono {
      *
      * @param vertices Um array de objetos do tipo {@code Ponto} que representam os
      *                 vértices do retângulo. O array deve conter exatamente 4 elementos.
-     * @throws IllegalArgumentException se o número de vértices não for igual a 4.
+     * @pre os pontos devem estar ordenados
+     * @post uma instância valida de Retangulo
+     * @inv pontos deve ter size =4
      */
     Retangulo(Ponto[] vertices) {
         if (vertices.length != 4) {

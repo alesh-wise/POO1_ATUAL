@@ -1,3 +1,10 @@
+/**
+ * A classe Poligono representa uma figura geométrica genérica composta por múltiplos lados.
+ * É uma especialização de FiguraG e é definida por um conjunto de vértices que devem estar
+ * ordenados de forma a formar um polígono válido.
+ *
+ * @author Alexandre Guerreiro, a88489
+ */
 public class Poligono extends FiguraG {
     private Ponto[] vertices;
 
@@ -17,14 +24,11 @@ public class Poligono extends FiguraG {
         this.vertices = vertices;
     }
 
-    public double perimetro() {
-        double perimetro = 0;
-        for (int i = 1; i < vertices.length; i++) {
-            perimetro += vertices[i - 1].distance_to(vertices[i]);
-        }
-        return perimetro;
-    }
-
+    /**
+     * Retorna o array de vértices que compõem o polígono.
+     *
+     * @return Um array de objetos do tipo {@code Ponto} representando os vértices do polígono.
+     */
     Ponto[] vertices() {
         return this.vertices;
     }

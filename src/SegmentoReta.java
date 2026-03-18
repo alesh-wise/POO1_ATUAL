@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @version 12/02/2026
  * @inv as coordenadas dos pontos devem ser maiores que 0
  */
-public class SegmentoReta {
+public class SegmentoReta extends FiguraG {
 
     private Ponto p1, p2;
     private Vetor v1;
@@ -103,67 +103,46 @@ public class SegmentoReta {
         return vq.p_interno(vr) >= Ponto.tol && vq.p_interno(vr) <= vr.p_interno(vr);
     }
 
-    /**
-     * Calcula o ponto de interseção entre o segmento de reta atual e outro segmento de reta.
-     * O método verifica se os dois segmentos se intersectam em um único ponto, se são colineares
-     * (e potencialmente se sobrepõem), ou se não se intersectam.
-     * <p>
-     * A lógica implementada para calcular a interseção segue os princípios dos vetores no plano
-     * bidimensional, verificando a orientação relativa das retas associadas aos segmentos.
-     *
-     * <p>
-     * Casos considerados:
-     * - Se os segmentos são colineares e possuem sobreposição, o ponto de interseção pode ser
-     * um dos extremos de um dos segmentos.
-     * - Se os segmentos não são colineares, mas se intersectam em um único ponto dentro dos limites
-     * dos dois segmentos, este ponto é retornado.
-     * - Caso contrário, o método retorna {@code null}, indicando que os segmentos não se intersectam.
-     * </p>
-     *
-     * @param segv O outro segmento de reta a ser testado para calcular a interseção.
-     * @return Um {@code Ponto} representando o ponto de interseção, caso exista. Retorna {@code null}
-     * se os segmentos não se intersectam ou são colineares sem sobreposição.
-     * @pre segv deve ser yma instância valida de SegmentoReta
-     * @post retorna uma nova instância valida de Ponto correspondente as coordenadas de interseção ou null, caso não se intersetem
-     */
-    public Ponto intersect(SegmentoReta segv) {
+    public Ponto intersect(FiguraG figure) {
 
+        if (figure instanceof SegmentoReta segv) {
+            Ponto r = p2.subtracao(p1);
+            Ponto s = segv.p2.subtracao(segv.p1);
+            Ponto qp = segv.p1.subtracao(p1);
 
-        Ponto r = p2.subtracao(p1);
-        Ponto s = segv.p2.subtracao(segv.p1);
-        Ponto qp = segv.p1.subtracao(p1);
+            double numerador = qp.produtoVetorial(s);
+            double rxs = r.produtoVetorial(s);
 
-        double numerador = qp.produtoVetorial(s);
-        double rxs = r.produtoVetorial(s);
+            if (Math.abs(rxs) < Ponto.tol && Math.abs(numerador) < Ponto.tol) {
+                if (segv.noSegmento(p1)) {
+                    return p1;
+                }
+                if (segv.noSegmento(p2)) {
+                    return p2;
+                }
+                if (this.noSegmento(segv.p1)) {
+                    return segv.p1;
+                }
+                if (this.noSegmento(segv.p2)) {
+                    return segv.p2;
+                }
+                return null;
+            }
 
-        if (Math.abs(rxs) < Ponto.tol && Math.abs(numerador) < Ponto.tol) {
-            if (segv.noSegmento(p1)) {
-                return p1;
+            if (Math.abs(rxs) < Ponto.tol) {
+                return null;
             }
-            if (segv.noSegmento(p2)) {
-                return p2;
+            double t = numerador / rxs;
+            double u = qp.produtoVetorial(r) / rxs;
+
+            if (u >= 0 && u <= 1 && t >= 0 && t <= 1) {
+                double interseta_x = p1.x() + t * r.x();
+                double interseta_y = p1.y() + t * r.y();
+                return new Ponto(interseta_x, interseta_y);
             }
-            if (this.noSegmento(segv.p1)) {
-                return segv.p1;
-            }
-            if (this.noSegmento(segv.p2)) {
-                return segv.p2;
-            }
+
             return null;
         }
-
-        if (Math.abs(rxs) < Ponto.tol) {
-            return null;
-        }
-        double t = numerador / rxs;
-        double u = qp.produtoVetorial(r) / rxs;
-
-        if (u >= 0 && u <= 1 && t >= 0 && t <= 1) {
-            double interseta_x = p1.x() + t * r.x();
-            double interseta_y = p1.y() + t * r.y();
-            return new Ponto(interseta_x, interseta_y);
-        }
-
         return null;
     }
 

@@ -1,3 +1,9 @@
+/**
+ * A classe Quadrado representa um tipo específico de polígono com quatro lados iguais e ângulos retos.
+ * Ela herda de Poligono e contém validações para garantir que os vértices fornecidos formam um quadrado válido.
+ *
+ * @author Alexandre Guerreiro, a88489
+ */
 public class Quadrado extends Poligono {
 
 
@@ -7,6 +13,7 @@ public class Quadrado extends Poligono {
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do quadrado.
      * @pre os pontos devem estar ordenados
+     * @post uma instância valida de Quadrado
      * @inv pontos deve ter size =4
      *
      */

@@ -17,17 +17,20 @@ public class Triangulo extends Poligono {
      */
     Triangulo(Ponto[] vertices) {
         if (vertices.length != 3) {
-            IO.println("Triangulo.iv");
+            IO.println("Triangulo:iv");
             System.exit(0);
         }
         double det = vertices[0].x() * (vertices[1].y() - vertices[2].y()) +
                 vertices[1].x() * (vertices[2].y() - vertices[0].y()) +
                 vertices[2].x() * (vertices[0].y() - vertices[1].y());
         if (Math.abs(det) < Ponto.tol) {
-            IO.println("Triangulo.iv");
+            IO.println("Triangulo:iv");
             System.exit(0);
         }
         super(vertices);
     }
 
+    public String toString() {
+        return this.vertices()[0].toString() + this.vertices()[1].toString() + this.vertices()[2].toString();
+    }
 }

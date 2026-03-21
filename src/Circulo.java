@@ -22,6 +22,10 @@ public class Circulo extends FiguraG {
      * @post uma instância valida de Circulo
      */
     Circulo(Ponto centro, double raio) {
+        if (raio <= 0) {
+            IO.println("Circulo:iv");
+            System.exit(0);
+        }
         this.centro = centro;
         this.raio = raio;
     }

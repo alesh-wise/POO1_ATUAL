@@ -18,7 +18,7 @@ public class Poligono extends FiguraG {
      */
     Poligono(Ponto[] vertices) {
         if (vertices.length < 3) {
-            IO.println("Poligono.iv");
+            IO.println("Poligono:iv");
             System.exit(0);
         }
         this.vertices = vertices;

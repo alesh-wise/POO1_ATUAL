@@ -103,47 +103,44 @@ public class SegmentoReta extends FiguraG {
         return vq.p_interno(vr) >= Ponto.tol && vq.p_interno(vr) <= vr.p_interno(vr);
     }
 
-    public Ponto intersect(FiguraG figure) {
+    public Ponto intersect(SegmentoReta segv) {
+        Ponto r = p2.subtracao(p1);
+        Ponto s = segv.p2.subtracao(segv.p1);
+        Ponto qp = segv.p1.subtracao(p1);
 
-        if (figure instanceof SegmentoReta segv) {
-            Ponto r = p2.subtracao(p1);
-            Ponto s = segv.p2.subtracao(segv.p1);
-            Ponto qp = segv.p1.subtracao(p1);
+        double numerador = qp.produtoVetorial(s);
+        double rxs = r.produtoVetorial(s);
 
-            double numerador = qp.produtoVetorial(s);
-            double rxs = r.produtoVetorial(s);
-
-            if (Math.abs(rxs) < Ponto.tol && Math.abs(numerador) < Ponto.tol) {
-                if (segv.noSegmento(p1)) {
-                    return p1;
-                }
-                if (segv.noSegmento(p2)) {
-                    return p2;
-                }
-                if (this.noSegmento(segv.p1)) {
-                    return segv.p1;
-                }
-                if (this.noSegmento(segv.p2)) {
-                    return segv.p2;
-                }
-                return null;
+        if (Math.abs(rxs) < Ponto.tol && Math.abs(numerador) < Ponto.tol) {
+            if (segv.noSegmento(p1)) {
+                return p1;
             }
-
-            if (Math.abs(rxs) < Ponto.tol) {
-                return null;
+            if (segv.noSegmento(p2)) {
+                return p2;
             }
-            double t = numerador / rxs;
-            double u = qp.produtoVetorial(r) / rxs;
-
-            if (u >= 0 && u <= 1 && t >= 0 && t <= 1) {
-                double interseta_x = p1.x() + t * r.x();
-                double interseta_y = p1.y() + t * r.y();
-                return new Ponto(interseta_x, interseta_y);
+            if (this.noSegmento(segv.p1)) {
+                return segv.p1;
             }
-
+            if (this.noSegmento(segv.p2)) {
+                return segv.p2;
+            }
             return null;
         }
+
+        if (Math.abs(rxs) < Ponto.tol) {
+            return null;
+        }
+        double t = numerador / rxs;
+        double u = qp.produtoVetorial(r) / rxs;
+
+        if (u >= 0 && u <= 1 && t >= 0 && t <= 1) {
+            double interseta_x = p1.x() + t * r.x();
+            double interseta_y = p1.y() + t * r.y();
+            return new Ponto(interseta_x, interseta_y);
+        }
+
         return null;
+
     }
 
     /**
@@ -179,19 +176,28 @@ public class SegmentoReta extends FiguraG {
         }
         if (discriminante >= 0) {
             discriminante = Math.sqrt(discriminante);
-
+            Ponto first = null, second = null;
             double t1 = (-b + discriminante) / (2 * a);
             if (t1 >= 0 && t1 <= 1) {
                 double interx = p1.x() + t1 * d.x();
                 double intery = p1.y() + t1 * d.y();
-                intersecoes.add(new Ponto(interx, intery));
+                first = new Ponto(interx, intery);
             }
 
             double t2 = (-b - discriminante) / (2 * a);
             if (t2 >= 0 && t2 <= 1 && discriminante > 0) {
                 double interx = p1.x() + t2 * d.x();
                 double intery = p1.y() + t2 * d.y();
-                intersecoes.add(new Ponto(interx, intery));
+                second = new Ponto(interx, intery);
+            }
+            if (first != null && second != null) {
+                if (first.distance_to(p1) < second.distance_to(p1)) {
+                    intersecoes.add(first);
+                    intersecoes.add(second);
+                } else {
+                    intersecoes.add(second);
+                    intersecoes.add(first);
+                }
             }
         }
         return intersecoes;

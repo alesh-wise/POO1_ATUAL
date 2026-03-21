@@ -60,7 +60,7 @@ public class Cliente {
             for (int i = 0; i < pontos.size(); i++) {
                 IO.print(pontos.get(i).toString());
                 if (i == pontos.size() - 1) {
-                    IO.println("\n");
+                    IO.print("\n");
                 } else {
                     IO.print(" ");
                 }

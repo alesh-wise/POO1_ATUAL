@@ -65,7 +65,6 @@ public class Route {
             }
             return pontosIntersect;
         } else if (fig instanceof Poligono p) {
-            pontosIntersect = new ArrayList<>();
             for (int i = 1; i < pontos.size(); i++) {
                 SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
                 for (int j = 1; j < p.vertices().length; j++) {
@@ -76,7 +75,6 @@ public class Route {
                 }
             }
         } else if (fig instanceof Circulo circle) {
-            pontosIntersect = new ArrayList<>();
             for (int i = 1; i < pontos.size(); i++) {
                 SegmentoReta segRota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
                 ArrayList<Ponto> temp = segRota.intersect(circle);

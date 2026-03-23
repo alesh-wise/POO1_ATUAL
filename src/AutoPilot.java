@@ -19,7 +19,7 @@ public class AutoPilot {
      * @param a O ponto inicial da trajetória.
      * @param b O ponto final da trajetória.
      * @pre a e b devem ser instâncias validas do tipo Ponto
-     * @post uma instância valida do tipo AutoPilot
+     * @post r passa a ser igual ao vetor b-a
      */
     public AutoPilot(Ponto a, Ponto b) {
         this.r = new Vetor(b.x() - a.x(), b.y() - a.y());
@@ -34,7 +34,6 @@ public class AutoPilot {
      * @return Um {@code Vetor} representando o vetor velocidade do objeto após considerar
      * a velocidade do vento e o intervalo de tempo especificado.
      * @pre windSpeed deve ser uma instância valida do tipo Vetor e time >0
-     * @post retorna uma nova instância do tipo Vetor que representa a velocidade resultante.
      */
     public Vetor speed(Vetor windSpeed, double time) {
         return r.sub(windSpeed).mult(1 / time);
@@ -48,7 +47,6 @@ public class AutoPilot {
      * @param linearSpeed Um {@code double} representando a velocidade linear do objeto.
      * @return Um {@code double} representando o tempo necessário para completar a trajetória.
      * @pre windSpeed deve ser uma instância valida do tipo Vetor e linear >0
-     * @post retorna um valor double >0 que representa o tempo necessario para completar a viagem.
      */
     public double time(Vetor windSpeed, double linearSpeed) {
         return r.sub(windSpeed).modulo() / linearSpeed;

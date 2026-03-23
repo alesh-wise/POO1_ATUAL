@@ -83,6 +83,15 @@ class RouteTest {
         expected.add(inter1);
         assertEquals(expected, rota.intersect(q));
 
+        Ponto longe1 = new Ponto(100, 100);
+        Ponto longe2 = new Ponto(200, 200);
+        ArrayList<Ponto> vertices2 = new ArrayList<>();
+        vertices2.add(longe1);
+        vertices2.add(longe2);
+
+        Route fora = new Route(vertices2);
+        expected = new ArrayList<>();
+        assertEquals(expected, fora.intersect(q));
     }
 
     @Test
@@ -106,6 +115,17 @@ class RouteTest {
         expected.add(inter1);
         expected.add(inter2);
         assertEquals(expected, rota.intersect(r));
+
+        Ponto longe1 = new Ponto(100, 100);
+        Ponto longe2 = new Ponto(200, 200);
+        ArrayList<Ponto> vertices2 = new ArrayList<>();
+        vertices2.add(longe1);
+        vertices2.add(longe2);
+
+        Route fora = new Route(vertices2);
+        expected = new ArrayList<>();
+        assertEquals(expected, fora.intersect(r));
+
     }
 
     @Test
@@ -130,6 +150,18 @@ class RouteTest {
         expected.add(inter2);
 
         assertEquals(expected, rota.intersect(t));
+
+        Ponto longe1 = new Ponto(100, 100);
+        Ponto longe2 = new Ponto(200, 200);
+        ArrayList<Ponto> vertices2 = new ArrayList<>();
+        vertices2.add(longe1);
+        vertices2.add(longe2);
+
+        Route fora = new Route(vertices2);
+        expected = new ArrayList<>();
+        assertEquals(expected, fora.intersect(t));
+
+
     }
 
     @Test
@@ -149,5 +181,16 @@ class RouteTest {
         expected.add(inter2);
 
         assertEquals(expected, rota.intersect(c));
+
+        Ponto longe1 = new Ponto(100, 100);
+        Ponto longe2 = new Ponto(200, 200);
+        ArrayList<Ponto> vertices2 = new ArrayList<>();
+        vertices2.add(longe1);
+        vertices2.add(longe2);
+
+        Route fora = new Route(vertices2);
+        expected = new ArrayList<>();
+        assertEquals(expected, fora.intersect(c));
+
     }
 }

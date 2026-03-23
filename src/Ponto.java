@@ -15,7 +15,7 @@ public class Ponto {
      *
      * @param x Coordenada x do ponto.
      * @param y Coordenada y do ponto.
-     * @post É criada uma instância valida Ponto com as coordenadas especificadas.
+     * @post x passa a ser igual x e y passa a ser igual ao y
      *
      */
     Ponto(double x, double y) {
@@ -46,7 +46,6 @@ public class Ponto {
      *
      * @return Retorna uma string com o formato desejado
      * <p>
-     * @post Retorna uma String formatada com as coordenadas do ponto, cada uma com aproximação de duas casas decimais.
      */
     @Override
     public String toString() {
@@ -59,7 +58,6 @@ public class Ponto {
      * @param that O ponto até o qual a distância será calculada.
      * @return A distância entre este ponto e o ponto that especificado.
      * @pre that deve ser uma instância valida de Ponto (that != null).
-     * @post Retorna um valor double>=0 que representa a distância euclidiana entre os dois pontos.
      */
     public double distance_to(Ponto that) {
         return Math.sqrt(Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2));
@@ -74,7 +72,6 @@ public class Ponto {
      * @return true se o objeto especificado for um {@code Ponto} e for
      * igual à instância atual dentro da tolerância;
      * caso contrário, false.
-     * @post Retorna true se 'o' for uma instância valida do tipo Ponto e a distância entre eles for menor que a tolerancia definida.
      */
     @Override
     public boolean equals(Object o) {
@@ -90,7 +87,6 @@ public class Ponto {
      * @param p2 o ponto cujas coordenadas serão subtraídas.
      * @return uma nova instância de {@code Ponto} com o resultado da subtração.
      * @pre p2 deve ser uma instância valida do tipo Ponto.
-     * @post retorna uma nova instância do tipo Ponto resultante da diferença algebrica entre as coordenadas (this.x() - p2.x(), this.y() - p2.y()).
      */
     public Ponto subtracao(Ponto p2) {
         return new Ponto(this.x() - p2.x(), this.y() - p2.y());
@@ -104,7 +100,6 @@ public class Ponto {
      * @param p2 O ponto com o qual o produto vetorial será calculado.
      * @return O resultado do produto vetorial entre o ponto atual e o ponto fornecido.
      * @pre p2 deve ser uma instância valida do tipo Ponto.
-     * @post retorna um escalar double >=0 correspondente ao produto vetorial entre os pontos.
      */
     public double produtoVetorial(Ponto p2) {
         return this.x * p2.y() - this.y * p2.x();

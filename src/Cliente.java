@@ -30,18 +30,38 @@ public class Cliente {
 
         FiguraG fig = null;
         String c = linha[0];
+        switch (c) {
+            case "P" -> {
+                Poligono sla = new Poligono(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+                pontos = rota.intersect(sla);
+                printPoints(pontos);
 
-        fig = switch (c) {
-            case "P" -> new Poligono(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-            case "S" -> new Quadrado(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-            case "R" -> new Retangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-            case "T" -> new Triangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-            case "C" ->
-                    new Circulo(new Ponto(Double.parseDouble(linha[1]), Double.parseDouble(linha[2])), Double.parseDouble(linha[3]));
-            default -> fig;
-        };
-        pontos = rota.intersect(fig);
-        printPoints(pontos);
+            }
+            case "S" -> {
+                Quadrado sla = new Quadrado(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+                pontos = rota.intersect(sla);
+                printPoints(pontos);
+
+            }
+            case "R" -> {
+                Retangulo sla = new Retangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+                pontos = rota.intersect(sla);
+                printPoints(pontos);
+
+            }
+            case "T" -> {
+                Triangulo sla = new Triangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
+                pontos = rota.intersect(sla);
+                printPoints(pontos);
+
+            }
+            case "C" -> {
+                Circulo sla = new Circulo(new Ponto(Double.parseDouble(linha[1]), Double.parseDouble(linha[2])), Double.parseDouble(linha[3]));
+                pontos = rota.intersect(sla);
+                printPoints(pontos);
+
+            }
+        }
 
     }
 

@@ -13,7 +13,7 @@ public class Retangulo extends Poligono {
      * @param vertices Um array de objetos do tipo {@code Ponto} que representam os
      *                 vértices do retângulo. O array deve conter exatamente 4 elementos.
      * @pre os pontos devem estar ordenados
-     * @post uma instância valida de Retangulo
+     * @post vertices passa a ser igual ao array vertices
      * @inv pontos deve ter size =4
      */
     Retangulo(Ponto[] vertices) {
@@ -23,25 +23,17 @@ public class Retangulo extends Poligono {
             IO.println("Retangulo:iv");
             System.exit(0);
         }
-        SegmentoReta aresta1 = new SegmentoReta(vertices[0], vertices[1]);
-        SegmentoReta aresta2 = new SegmentoReta(vertices[2], vertices[3]);
-        if (aresta1.comprimento() != aresta2.comprimento()) {
+        if (vertices[0].distance_to(vertices[1]) != vertices[2].distance_to(vertices[3])) {
             IO.println("Retangulo:iv");
             System.exit(0);
         }
 
-        SegmentoReta aresta3 = new SegmentoReta(vertices[0], vertices[3]);
-        SegmentoReta aresta4 = new SegmentoReta(vertices[1], vertices[2]);
-
-        if (aresta3.comprimento() != aresta4.comprimento()) {
+        if (vertices[0].distance_to(vertices[3]) != vertices[1].distance_to(vertices[2])) {
             IO.println("Retangulo:iv");
             System.exit(0);
         }
 
-        SegmentoReta diagonal1 = new SegmentoReta(vertices[0], vertices[2]);
-        SegmentoReta diagonal2 = new SegmentoReta(vertices[1], vertices[3]);
-
-        if (diagonal1.comprimento() != diagonal2.comprimento()) {
+        if (vertices[0].distance_to(vertices[2]) != vertices[1].distance_to(vertices[3])) {
             IO.println("Retangulo:iv");
             System.exit(0);
         }

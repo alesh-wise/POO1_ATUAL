@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * A classe Poligono representa uma figura geométrica genérica composta por múltiplos lados.
  * É uma especialização de FiguraG e é definida por um conjunto de vértices que devem estar
@@ -14,14 +16,14 @@ public class Poligono extends FiguraG {
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do polígono.
      * @pre os pontos do ArrayList vertices devem estar ordenados para formar o poligono
-     * @post uma instância valida de Poligono
+     * @post uma vertices passa a ser igual ao array vertices
      */
     Poligono(Ponto[] vertices) {
         if (vertices.length < 3) {
             IO.println("Poligono:iv");
             System.exit(0);
         }
-        this.vertices = vertices;
+        this.vertices = Arrays.copyOf(vertices, vertices.length);
     }
 
     /**

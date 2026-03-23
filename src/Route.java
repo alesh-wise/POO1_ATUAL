@@ -18,7 +18,7 @@ public class Route {
      * @param pontos Uma lista de objetos {@code Ponto} que representam os pontos sequenciais
      *               que compõem a rota.
      * @pre ArrayList pontos com size >=2
-     * @post Uma instância valida de Route.
+     * @post pontos passa a ser igual ao ArrayList pontos
      */
     Route(ArrayList<Ponto> pontos) {
         this.pontos = pontos;
@@ -30,7 +30,6 @@ public class Route {
      * O comprimento é calculado como a soma das distâncias Euclidianas entre pontos consecutivos na lista.
      *
      * @return O comprimento total da rota.
-     * @post Retorna um valor double >=0 correspondente ao comprimento da rota.
      */
     public double comprimento() {
         double comprimento = 0;
@@ -41,50 +40,68 @@ public class Route {
     }
 
     /**
-     * Calcula e retorna os pontos de interseção entre a rota (composta por pontos sequenciais)
-     * e uma figura geométrica fornecida. A figura geométrica pode ser um segmento de reta, um polígono ou um círculo.
-     * Dependendo do tipo da figura geométrica, uma lógica apropriada de interseção é aplicada.
+     * Calcula os pontos de interseção entre um segmento de reta dado e os segmentos
+     * formados pelos pontos sequenciais da rota.
      *
-     * @param fig A figura geométrica com a qual os pontos de interseção da rota serão calculados.
-     *            Pode ser uma instância de {@code SegmentoReta}, {@code Poligono} ou {@code Circulo}.
-     * @return Uma {@code ArrayList} de objetos {@code Ponto} que representam os pontos de interseção.
-     * Se não houver interseções, uma lista vazia será retornada.
-     * @pre A figura geométrica passada em fig deve ser uma instância válida de uma das classes mencionadas.
-     * @post Retorna uma lista contendo os pontos de interseção ou uma lista vazia se não houver interseções.
+     * @param sg O segmento de reta que será testado para interseção com os segmentos
+     *           formados pelos pontos da rota.
+     * @return Uma lista de pontos que representam as interseções encontradas. A lista
+     * retornada pode estar vazia se nenhuma interseção for encontrada.
      */
-    public ArrayList<Ponto> intersect(FiguraG fig) {
+    public ArrayList<Ponto> intersect(SegmentoReta sg) {
         ArrayList<Ponto> pontosIntersect = new ArrayList<>();
-        if (fig instanceof SegmentoReta sg) {
-            for (int i = 1; i < pontos.size(); i++) {
-                SegmentoReta temp = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-                Ponto intersect = temp.intersect(sg);
-                if (intersect != null) {
-                    pontosIntersect.add(intersect);
-
-                }
-            }
-            return pontosIntersect;
-        } else if (fig instanceof Poligono p) {
-            for (int i = 1; i < pontos.size(); i++) {
-                SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-                for (int j = 0; j < p.vertices().length; j++) {
-                    Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j], p.vertices()[(j + 1) % p.vertices().length]));
-                    if (intersecao != null && !pontosIntersect.contains(intersecao)) {
-                        pontosIntersect.add(intersecao);
-                    }
-
-                }
+        for (int i = 1; i < pontos.size(); i++) {
+            SegmentoReta temp = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+            Ponto intersect = temp.intersect(sg);
+            if (intersect != null) {
+                pontosIntersect.add(intersect);
 
             }
-        } else if (fig instanceof Circulo circle) {
-            for (int i = 1; i < pontos.size(); i++) {
-                SegmentoReta segRota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-                ArrayList<Ponto> temp = segRota.intersect(circle);
-                if (temp != null) {
-                    pontosIntersect.addAll(temp);
-                }
-            }
+        }
+        return pontosIntersect;
+    }
 
+    /**
+     * Calcula os pontos de interseção entre a rota representada pelos segmentos formados pelos
+     * pontos da classe atual e os segmentos que compõem o polígono fornecido.
+     *
+     * @param p O polígono cujos segmentos serão testados para interseção com os segmentos
+     *          formados pelos pontos da rota.
+     * @return Uma lista contendo os pontos de interseção encontrados entre os segmentos
+     * da rota e os segmentos do polígono. A lista pode estar vazia se nenhuma interseção for encontrada.
+     */
+    public ArrayList<Ponto> intersect(Poligono p) {
+        ArrayList<Ponto> pontosIntersect = new ArrayList<>();
+        for (int i = 1; i < pontos.size(); i++) {
+            SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+            for (int j = 0; j < p.vertices().length; j++) {
+                Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j], p.vertices()[(j + 1) % p.vertices().length]));
+                if (intersecao != null && !pontosIntersect.contains(intersecao)) {
+                    pontosIntersect.add(intersecao);
+                }
+
+            }
+        }
+        return pontosIntersect;
+    }
+
+    /**
+     * Calcula os pontos de interseção entre um círculo fornecido e os segmentos
+     * formados pelos pontos sequenciais da rota representada pela instância atual.
+     *
+     * @param circle O círculo para o qual os segmentos serão testados para interseção.
+     * @return Uma lista contendo os pontos de interseção encontrados entre o círculo e os
+     * segmentos da rota. A lista retornada pode estar vazia se nenhuma interseção
+     * for encontrada.
+     */
+    public ArrayList<Ponto> intersect(Circulo circle) {
+        ArrayList<Ponto> pontosIntersect = new ArrayList<>();
+        for (int i = 1; i < pontos.size(); i++) {
+            SegmentoReta segRota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
+            ArrayList<Ponto> temp = segRota.intersect(circle);
+            if (temp != null) {
+                pontosIntersect.addAll(temp);
+            }
         }
         return pontosIntersect;
     }

@@ -13,7 +13,7 @@ public class Triangulo extends Poligono {
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do quadrado.
      * @inv pontos deve ter size =3
      * @pre os pontos devem estar ordenados
-     * @post uma instância valida de Triangulo
+     * @post vertices passa a ser igual ao array vertices
      */
     Triangulo(Ponto[] vertices) {
         super(vertices);

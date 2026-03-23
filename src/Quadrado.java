@@ -13,7 +13,7 @@ public class Quadrado extends Poligono {
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do quadrado.
      * @pre os pontos devem estar ordenados
-     * @post uma instância valida de Quadrado
+     * @post vertices passa a ser igual ao array vertices
      * @inv pontos deve ter size =4
      *
      */
@@ -25,17 +25,11 @@ public class Quadrado extends Poligono {
             System.exit(0);
         }
 
-        SegmentoReta diagonal1 = new SegmentoReta(vertices[0], vertices[2]);
-        SegmentoReta diagonal2 = new SegmentoReta(vertices[1], vertices[3]);
-        if (diagonal1.comprimento() != diagonal2.comprimento()) {
+        if (vertices[0].distance_to(vertices[2]) != vertices[1].distance_to(vertices[3])) {
             IO.println("Quadrado:iv");
             System.exit(0);
         }
-        SegmentoReta aresta1 = new SegmentoReta(vertices[0], vertices[1]);
-        SegmentoReta aresta2 = new SegmentoReta(vertices[1], vertices[2]);
-        SegmentoReta aresta3 = new SegmentoReta(vertices[2], vertices[3]);
-        SegmentoReta aresta4 = new SegmentoReta(vertices[3], vertices[0]);
-        if ((aresta1.comprimento() != aresta2.comprimento()) || (aresta1.comprimento() != aresta3.comprimento()) || aresta1.comprimento() != aresta4.comprimento()) {
+        if ((vertices[0].distance_to(vertices[1]) != vertices[0].distance_to(vertices[3])) || (vertices[1].distance_to(vertices[2]) != vertices[2].distance_to(vertices[3]))) {
             IO.println("Quadrado:iv");
             System.exit(0);
         }

@@ -48,7 +48,7 @@ public class AutoPilot {
      * @param linearSpeed Um {@code double} representando a velocidade linear do objeto.
      * @return Um {@code double} representando o tempo necessário para completar a trajetória.
      * @pre windSpeed deve ser uma instância valida do tipo Vetor e linear >0
-     * @pro retorna um valor double >0 que representa o tempo necessario para completar a viagem.
+     * @post retorna um valor double >0 que representa o tempo necessario para completar a viagem.
      */
     public double time(Vetor windSpeed, double linearSpeed) {
         return r.sub(windSpeed).modulo() / linearSpeed;

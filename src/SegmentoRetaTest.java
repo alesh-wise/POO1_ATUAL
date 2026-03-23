@@ -12,7 +12,7 @@ class SegmentoRetaTest {
     }
 
     @Test
-    public void intersect() {
+    public void intersectVetor() {
         SegmentoReta sg = new SegmentoReta(new Ponto(0, 1), new Ponto(4, 1));
         Vetor v = new Vetor(2, 2);
         Ponto expected = new Ponto(1.0, 1.0);
@@ -20,6 +20,14 @@ class SegmentoRetaTest {
         Vetor vetor = new Vetor(2, 2);
         assertEquals(expected, v.intersect(sg));
         assertNull(vetor.intersect(segmentoReta));
+    }
+
+    @Test
+    public void intersectSegmento() {
+        SegmentoReta sg1 = new SegmentoReta(new Ponto(0, 2), new Ponto(4, 2));
+        SegmentoReta sg2 = new SegmentoReta(new Ponto(2, 0), new Ponto(2, 4));
+        Ponto expected = new Ponto(2, 2);
+        assertEquals(expected, sg1.intersect(sg2));
     }
 
     @Test

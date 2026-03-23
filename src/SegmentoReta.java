@@ -103,6 +103,21 @@ public class SegmentoReta extends FiguraG {
         return vq.p_interno(vr) >= Ponto.tol && vq.p_interno(vr) <= vr.p_interno(vr);
     }
 
+
+    /**
+     * Calcula o ponto de interseção entre o segmento de reta atual e outro segmento de reta fornecido.
+     * <p>
+     * Se os segmentos se intersectam em um único ponto, esse ponto é retornado.
+     * Se os segmentos se sobrepõem (são colineares e possuem interseção), um dos pontos de sobreposição é retornado.
+     * Se não houver interseção ou os segmentos forem paralelos e não se sobrepuserem, retorna {@code null}.
+     *
+     * @param segv O outro segmento de reta a ser usado no cálculo da interseção.
+     *             Deve ser uma instância válida de {@code SegmentoReta}.
+     * @return O {@code Ponto} correspondente ao ponto de interseção, se existir.
+     * Retorna {@code null} se não houver interseção ou se os segmentos forem paralelos sem sobreposição.
+     * @pre segv deve ser uma instância válida de SegmentoReta.
+     * @post Retorna um ponto de interseção válido ou {@code null}.
+     */
     public Ponto intersect(SegmentoReta segv) {
         Ponto r = p2.subtracao(p1);
         Ponto s = segv.p2.subtracao(segv.p1);

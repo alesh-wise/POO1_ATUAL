@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * A classe SegmentoReta representa um segmento de reta em um plano bidimensional.
+ * A classe SegmentoReta representa um segmento de reta num plano bidimensional.
  * Ela pode ser definida através de dois pontos ou por um ponto inicial e um vetor.
  * Além disso, permite realizar operações como calcular o comprimento do segmento,
  * verificar se um ponto está contido nele, ou determinar pontos de interseção com vetores.

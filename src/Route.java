@@ -67,12 +67,14 @@ public class Route {
         } else if (fig instanceof Poligono p) {
             for (int i = 1; i < pontos.size(); i++) {
                 SegmentoReta segmento_rota = new SegmentoReta(pontos.get(i - 1), pontos.get(i));
-                for (int j = 1; j < p.vertices().length; j++) {
-                    Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j - 1], p.vertices()[j]));
-                    if (intersecao != null) {
+                for (int j = 0; j < p.vertices().length; j++) {
+                    Ponto intersecao = segmento_rota.intersect(new SegmentoReta(p.vertices()[j], p.vertices()[(j + 1) % p.vertices().length]));
+                    if (intersecao != null && !pontosIntersect.contains(intersecao)) {
                         pontosIntersect.add(intersecao);
                     }
+
                 }
+
             }
         } else if (fig instanceof Circulo circle) {
             for (int i = 1; i < pontos.size(); i++) {

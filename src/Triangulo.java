@@ -30,7 +30,4 @@ public class Triangulo extends Poligono {
         super(vertices);
     }
 
-    public String toString() {
-        return this.vertices()[0].toString() + this.vertices()[1].toString() + this.vertices()[2].toString();
-    }
 }

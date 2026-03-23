@@ -19,7 +19,8 @@ class RouteTest {
     }
 
     @Test
-    void intersect() {
+    void intersectSegmentoReta() {
+
         ArrayList<Ponto> pontos = new ArrayList<Ponto>();
         pontos.add(new Ponto(0, 1));
         pontos.add(new Ponto(1, 1));
@@ -31,5 +32,122 @@ class RouteTest {
         Ponto intersect = new Ponto(2, 2);
         expected.add(intersect);
         assertEquals(expected, rota.intersect(sg));
+    }
+
+    @Test
+    void intersectPoligono() {
+        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+        pontos.add(new Ponto(0, 1));
+        pontos.add(new Ponto(1, 1));
+        pontos.add(new Ponto(4, 4));
+        pontos.add(new Ponto(4, 3));
+        Route rota = new Route(pontos);
+
+        Ponto[] vertices = new Ponto[4];
+        vertices[1] = new Ponto(2, 4);
+        vertices[2] = new Ponto(3, 4);
+        vertices[3] = new Ponto(3, 1);
+        vertices[0] = new Ponto(2, 1);
+
+        Poligono p = new Poligono(vertices);
+
+        ArrayList<Ponto> expected = new ArrayList<Ponto>();
+        Ponto inter1 = new Ponto(2, 2);
+        Ponto inter2 = new Ponto(3, 3);
+        expected.add(inter1);
+        expected.add(inter2);
+
+        assertEquals(expected, rota.intersect(p));
+    }
+
+    @Test
+    void intersectQuadrado() {
+        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+        pontos.add(new Ponto(0, 1));
+        pontos.add(new Ponto(1, 1));
+        pontos.add(new Ponto(4, 4));
+        pontos.add(new Ponto(4, 3));
+        Route rota = new Route(pontos);
+
+        Ponto[] vertices = new Ponto[4];
+
+        vertices[0] = new Ponto(1, 2);
+        vertices[1] = new Ponto(1, 4);
+        vertices[2] = new Ponto(3, 4);
+        vertices[3] = new Ponto(3, 2);
+        Quadrado q = new Quadrado(vertices);
+        ArrayList<Ponto> expected = new ArrayList<Ponto>();
+        Ponto inter1 = new Ponto(2, 2);
+        Ponto inter2 = new Ponto(3, 3);
+        expected.add(inter2);
+        expected.add(inter1);
+        assertEquals(expected, rota.intersect(q));
+
+    }
+
+    @Test
+    void intersectRetangulo() {
+        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+        pontos.add(new Ponto(0, 1));
+        pontos.add(new Ponto(1, 1));
+        pontos.add(new Ponto(4, 4));
+        pontos.add(new Ponto(4, 3));
+        Route rota = new Route(pontos);
+        Ponto[] vertices = new Ponto[4];
+        vertices[1] = new Ponto(1.5, 4.0);
+        vertices[2] = new Ponto(3.5, 4.0);
+        vertices[3] = new Ponto(3.5, 0.0);
+        vertices[0] = new Ponto(1.5, 0.0);
+        Retangulo r = new Retangulo(vertices);
+        Ponto inter1 = new Ponto(1.5, 1.5);
+        Ponto inter2 = new Ponto(3.5, 3.5);
+        ArrayList<Ponto> expected = new ArrayList<Ponto>();
+
+        expected.add(inter1);
+        expected.add(inter2);
+        assertEquals(expected, rota.intersect(r));
+    }
+
+    @Test
+    void intersectTriangulo() {
+        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+        pontos.add(new Ponto(0, 1));
+        pontos.add(new Ponto(1, 1));
+        pontos.add(new Ponto(4, 4));
+        pontos.add(new Ponto(4, 3));
+        Route rota = new Route(pontos);
+
+        Ponto[] vertices = new Ponto[3];
+        vertices[0] = new Ponto(2, 0);
+        vertices[1] = new Ponto(2, 4);
+        vertices[2] = new Ponto(4, 2);
+
+        Triangulo t = new Triangulo(vertices);
+        ArrayList<Ponto> expected = new ArrayList<Ponto>();
+        Ponto inter1 = new Ponto(2, 2);
+        Ponto inter2 = new Ponto(3, 3);
+        expected.add(inter1);
+        expected.add(inter2);
+
+        assertEquals(expected, rota.intersect(t));
+    }
+
+    @Test
+    void intersectCirculo() {
+        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
+        pontos.add(new Ponto(0, 1));
+        pontos.add(new Ponto(1, 1));
+        pontos.add(new Ponto(4, 4));
+        pontos.add(new Ponto(4, 3));
+        Route rota = new Route(pontos);
+
+        Circulo c = new Circulo(new Ponto(2, 3), 1);
+        ArrayList<Ponto> expected = new ArrayList<Ponto>();
+        Ponto inter1 = new Ponto(2, 2);
+        Ponto inter2 = new Ponto(3, 3);
+        expected.add(inter1);
+        expected.add(inter2);
+
+        assertEquals(expected, rota.intersect(c));
     }
 }

@@ -17,6 +17,8 @@ public class Retangulo extends Poligono {
      * @inv pontos deve ter size =4
      */
     Retangulo(Ponto[] vertices) {
+
+        super(vertices);
         if (vertices.length != 4) {
             IO.println("Retangulo:iv");
             System.exit(0);
@@ -43,7 +45,5 @@ public class Retangulo extends Poligono {
             IO.println("Retangulo:iv");
             System.exit(0);
         }
-        
-        super(vertices);
     }
 }

@@ -16,6 +16,7 @@ public class Triangulo extends Poligono {
      * @post uma instância valida de Triangulo
      */
     Triangulo(Ponto[] vertices) {
+        super(vertices);
         if (vertices.length != 3) {
             IO.println("Triangulo:iv");
             System.exit(0);
@@ -27,7 +28,6 @@ public class Triangulo extends Poligono {
             IO.println("Triangulo:iv");
             System.exit(0);
         }
-        super(vertices);
     }
 
 }

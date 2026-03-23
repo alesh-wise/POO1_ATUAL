@@ -18,10 +18,13 @@ public class Quadrado extends Poligono {
      *
      */
     Quadrado(Ponto[] vertices) {
+
+        super(vertices);
         if (vertices.length != 4) {
             IO.println("Quadrado:iv");
             System.exit(0);
         }
+
         SegmentoReta diagonal1 = new SegmentoReta(vertices[0], vertices[2]);
         SegmentoReta diagonal2 = new SegmentoReta(vertices[1], vertices[3]);
         if (diagonal1.comprimento() != diagonal2.comprimento()) {
@@ -36,6 +39,5 @@ public class Quadrado extends Poligono {
             IO.println("Quadrado:iv");
             System.exit(0);
         }
-        super(vertices);
     }
 }

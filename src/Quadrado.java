@@ -13,7 +13,7 @@ public class Quadrado extends Poligono {
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do quadrado.
      * @pre os pontos devem estar ordenados
-     * @post vertices passa a ser igual ao array vertices
+     * @post this.vertices passa a ser igual ao array vertices
      * @inv pontos deve ter size =4
      *
      */

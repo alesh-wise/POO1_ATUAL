@@ -15,7 +15,7 @@ public class Ponto {
      *
      * @param x Coordenada x do ponto.
      * @param y Coordenada y do ponto.
-     * @post x passa a ser igual x e y passa a ser igual ao y
+     * @post this.x passa a ser igual x e this.y passa a ser igual ao y
      *
      */
     Ponto(double x, double y) {

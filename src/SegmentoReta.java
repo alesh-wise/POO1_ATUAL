@@ -24,9 +24,9 @@ public class SegmentoReta extends FiguraG {
      *           até o ponto final do segmento.
      * @pre p1 deve ser uma instância valida do tipo Ponto
      * @pre v1 deve ser uma instância valido do tipo Vetor
-     * @post p1 passa a ser igual ao Ponto p1
-     * @post v1 passa a ser igual a p1
-     * @post p2 passa a ser igual a p1 + v1
+     * @post this.p1 passa a ser igual ao Ponto p1
+     * @post this.v1 passa a ser igual a p1
+     * @post this.p2 passa a ser igual a p1 + v1
      */
     SegmentoReta(Ponto p1, Vetor v1) {
         this(p1, new Ponto(p1.x() + v1.x(), p1.y() + v1.y()));
@@ -41,9 +41,9 @@ public class SegmentoReta extends FiguraG {
      * @param p1 O ponto inicial do segmento de reta.
      * @param p2 O ponto final do segmento de reta.
      * @pre p1 e p2 devem ser instância validas do tipo Ponto e diferentes
-     * @post p1 passa a ser igual ao Ponto p1
-     * @post v1 passa a ser igual a p1
-     * @post p2 passa a ser igual a p1 + v1
+     * @post this.p1 passa a ser igual ao Ponto p1
+     * @post this.v1 passa a ser igual a p1
+     * @post this.p2 passa a ser igual a p1 + v1
      */
     SegmentoReta(Ponto p1, Ponto p2) {
         this.p1 = p1;

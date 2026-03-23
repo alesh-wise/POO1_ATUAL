@@ -19,7 +19,7 @@ public class Circulo extends FiguraG {
      * @param raio   O valor do raio do círculo, representando a distância entre o centro
      *               e qualquer ponto da circunferência.
      * @pre centro deve ser uma instância valida de Ponto
-     * @post raio passa a ser igual ao double raio e centro igual ao ponto centro
+     * @post this.raio passa a ser igual ao double raio e this.centro igual ao ponto centro
      */
     Circulo(Ponto centro, double raio) {
         if (raio <= 0) {

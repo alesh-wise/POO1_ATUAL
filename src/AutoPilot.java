@@ -19,7 +19,7 @@ public class AutoPilot {
      * @param a O ponto inicial da trajetória.
      * @param b O ponto final da trajetória.
      * @pre a e b devem ser instâncias validas do tipo Ponto
-     * @post r passa a ser igual ao vetor b-a
+     * @post this.r passa a ser igual ao vetor b-a
      */
     public AutoPilot(Ponto a, Ponto b) {
         this.r = new Vetor(b.x() - a.x(), b.y() - a.y());

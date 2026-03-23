@@ -20,7 +20,7 @@ public class Vetor {
      *
      * @param x Coordenada x do vetor.
      * @param y Coordenada y do vetor.
-     * @post x()==x, y()==y.
+     * @post this.x==x, this.y==y.
      */
 
     Vetor(double x, double y) {

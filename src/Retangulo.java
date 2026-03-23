@@ -13,7 +13,7 @@ public class Retangulo extends Poligono {
      * @param vertices Um array de objetos do tipo {@code Ponto} que representam os
      *                 vértices do retângulo. O array deve conter exatamente 4 elementos.
      * @pre os pontos devem estar ordenados
-     * @post vertices passa a ser igual ao array vertices
+     * @post this.vertices passa a ser igual ao array vertices
      * @inv pontos deve ter size =4
      */
     Retangulo(Ponto[] vertices) {

@@ -18,7 +18,7 @@ public class Route {
      * @param pontos Uma lista de objetos {@code Ponto} que representam os pontos sequenciais
      *               que compõem a rota.
      * @pre ArrayList pontos com size >=2
-     * @post pontos passa a ser igual ao ArrayList pontos
+     * @post this.pontos passa a ser igual ao ArrayList pontos
      */
     Route(ArrayList<Ponto> pontos) {
         this.pontos = pontos;

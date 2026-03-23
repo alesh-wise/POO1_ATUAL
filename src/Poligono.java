@@ -16,7 +16,7 @@ public class Poligono extends FiguraG {
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do polígono.
      * @pre os pontos do ArrayList vertices devem estar ordenados para formar o poligono
-     * @post uma vertices passa a ser igual ao array vertices
+     * @post this.vertices passa a ser igual ao array vertices
      */
     Poligono(Ponto[] vertices) {
         if (vertices.length < 3) {

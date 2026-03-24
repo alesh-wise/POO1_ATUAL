@@ -27,6 +27,7 @@ public class AutoPilot {
      */
     public AutoPilot(Ponto a, Ponto b) {
         pontos = new ArrayList<>();
+        vetores = new ArrayList<>();
         pontos.add(a);
         pontos.add(b);
         r = new Vetor(b.x() - a.x(), b.y() - a.y());
@@ -35,6 +36,8 @@ public class AutoPilot {
 
 
     public AutoPilot(Route rota) {
+        pontos = new ArrayList<>();
+        vetores = new ArrayList<>();
         ArrayList<Ponto> pontosRota = rota.pontos();
         pontos.add(pontosRota.get(0));
         for (int i = 1; i < pontosRota.size(); i++) {

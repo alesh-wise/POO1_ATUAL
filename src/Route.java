@@ -139,4 +139,22 @@ public class Route {
         return f;
     }
 
+    public ArrayList<Vetor> speed(Vetor windspeed, double totalTime, double linearSpeed) {
+        double timeSeg;
+        Ponto p1 = null, p2 = null;
+        ArrayList<Vetor> velocidades = new ArrayList<>();
+        for (int i = 1; i < this.pontos.size(); i++) {
+            p1 = pontos.get(i - 1);
+            p2 = pontos.get(i);
+            AutoPilot at = new AutoPilot(p1, p2);
+            timeSeg = at.time(linearSpeed);
+            velocidades.add(at.speed(windspeed, timeSeg));
+            if (totalTime < timeSeg || Math.abs(totalTime - timeSeg) < Ponto.tol) {
+                break;
+            }
+            totalTime -= timeSeg;
+
+        }
+        return velocidades;
+    }
 }

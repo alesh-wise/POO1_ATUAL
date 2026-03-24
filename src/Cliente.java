@@ -30,8 +30,13 @@ public class Cliente {
         linha = br.readLine().split(" ");
         double time = Double.parseDouble(linha[0]);
         IO.println(r.timeRoute(linearspeed));
-        Ponto pos = r.posicaoFinal(r.timeRoute(linearspeed), linearspeed);
+        Ponto pos = r.posicaoFinal(linearspeed, time);
         IO.println(pos);
+        ArrayList<Vetor> velocidades = r.speed(windspeed, time, linearspeed);
+        for (Vetor v : velocidades) {
+            IO.print(v);
+        }
+
     }
 
 

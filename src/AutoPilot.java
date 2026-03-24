@@ -36,19 +36,20 @@ public class AutoPilot {
      * @pre windSpeed deve ser uma instância valida do tipo Vetor e time >0
      */
     public Vetor speed(Vetor windSpeed, double time) {
-        return r.sub(windSpeed).mult(1 / time);
+        return r.mult(1 / time).sub(windSpeed);
     }
 
     /**
      * Calcula o tempo necessário para um objeto percorrer uma trajetória
      * considerando a influência da velocidade do vento e sua velocidade linear.
      *
-     * @param windSpeed   Um {@code Vetor} representando a velocidade do vento que atua contra o objeto.
      * @param linearSpeed Um {@code double} representando a velocidade linear do objeto.
      * @return Um {@code double} representando o tempo necessário para completar a trajetória.
      * @pre windSpeed deve ser uma instância valida do tipo Vetor e linear >0
      */
-    public double time(Vetor windSpeed, double linearSpeed) {
-        return r.sub(windSpeed).modulo() / linearSpeed;
+    public double time(double linearSpeed) {
+        return r.modulo() / linearSpeed;
     }
+
+
 }

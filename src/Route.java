@@ -106,4 +106,37 @@ public class Route {
         return pontosIntersect;
     }
 
+    public double timeRoute(double linearSpeed) {
+        double time = 0;
+        for (int i = 1; i < this.pontos.size(); i++) {
+            Ponto p1 = pontos.get(i - 1);
+            Ponto p2 = pontos.get(i);
+            AutoPilot at = new AutoPilot(p1, p2);
+            time += at.time(linearSpeed);
+        }
+        return time;
+    }
+
+    public Ponto posicaoFinal(double linearSpeed, double totalTime) {
+        Ponto f;
+        double timeSeg;
+        Ponto p1 = null, p2 = null;
+        for (int i = 1; i < this.pontos.size(); i++) {
+            p1 = pontos.get(i - 1);
+            p2 = pontos.get(i);
+            AutoPilot at = new AutoPilot(p1, p2);
+            timeSeg = at.time(linearSpeed);
+            if (totalTime < timeSeg || Math.abs(totalTime - timeSeg) < Ponto.tol) {
+                break;
+            }
+            totalTime -= timeSeg;
+        }
+        double deslocamento = totalTime * linearSpeed;
+        Vetor direcao = new Vetor(new Ponto(p2.x() - p1.x(), p2.y() - p1.y()));
+        double m = direcao.modulo();
+        Vetor u = new Vetor(direcao.x() / m, direcao.y() / m);
+        f = new Ponto(p1.x() + u.x() * deslocamento, p1.y() + u.y() * deslocamento);
+        return f;
+    }
+
 }

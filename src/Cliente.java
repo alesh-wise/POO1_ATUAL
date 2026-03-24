@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A classe Cliente é responsável por receber a entrada do usuário via console,
@@ -19,50 +18,20 @@ import java.util.Arrays;
  */
 public class Cliente {
     public static void main() throws IOException {
-        ArrayList<Ponto> pontos = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] linha = br.readLine().split(" ");
-        for (int i = 0; i < linha.length; i += 2) {
-            pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
-        }
-        Route rota = new Route(pontos);
+        ArrayList<Ponto> pontos = vertices(linha);
+        Route r = new Route(pontos);
+        IO.println(r.comprimento());
         linha = br.readLine().split(" ");
-
-        FiguraG fig = null;
-        String c = linha[0];
-        switch (c) {
-            case "P" -> {
-                Poligono sla = new Poligono(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-                pontos = rota.intersect(sla);
-                printPoints(pontos);
-
-            }
-            case "S" -> {
-                Quadrado sla = new Quadrado(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-                pontos = rota.intersect(sla);
-                printPoints(pontos);
-
-            }
-            case "R" -> {
-                Retangulo sla = new Retangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-                pontos = rota.intersect(sla);
-                printPoints(pontos);
-
-            }
-            case "T" -> {
-                Triangulo sla = new Triangulo(vertices(Arrays.copyOfRange(linha, 1, linha.length)));
-                pontos = rota.intersect(sla);
-                printPoints(pontos);
-
-            }
-            case "C" -> {
-                Circulo sla = new Circulo(new Ponto(Double.parseDouble(linha[1]), Double.parseDouble(linha[2])), Double.parseDouble(linha[3]));
-                pontos = rota.intersect(sla);
-                printPoints(pontos);
-
-            }
-        }
-
+        Vetor windspeed = new Vetor(new Ponto(Double.parseDouble(linha[0]), Double.parseDouble(linha[1])));
+        linha = br.readLine().split(" ");
+        double linearspeed = Double.parseDouble(linha[0]);
+        linha = br.readLine().split(" ");
+        double time = Double.parseDouble(linha[0]);
+        IO.println(r.timeRoute(linearspeed));
+        Ponto pos = r.posicaoFinal(r.timeRoute(linearspeed), linearspeed);
+        IO.println(pos);
     }
 
 
@@ -78,12 +47,12 @@ public class Cliente {
      * @pre uma instância valida do tipo String[]
      * @post retorna uma nova instância valida do tipo Ponto[]
      */
-    public static Ponto[] vertices(String[] linha) {
-        Ponto[] vertices = new Ponto[linha.length / 2];
+    public static ArrayList<Ponto> vertices(String[] linha) {
+        ArrayList<Ponto> pontos = new ArrayList<>();
         for (int i = 0; i < linha.length; i += 2) {
-            vertices[i / 2] = new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1]));
+            pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
         }
-        return vertices;
+        return pontos;
     }
 
     /**

@@ -26,9 +26,11 @@ public class AutoPilot {
      * @post this.r passa a ser igual ao vetor b-a
      */
     public AutoPilot(Ponto a, Ponto b) {
+        pontos = new ArrayList<>();
         pontos.add(a);
         pontos.add(b);
-        vetores.add(new Vetor(b.x() - a.x(), b.y() - a.y()));
+        r = new Vetor(b.x() - a.x(), b.y() - a.y());
+        vetores.add(r);
     }
 
 
@@ -39,6 +41,7 @@ public class AutoPilot {
             vetores.add(new Vetor(pontosRota.get(i).x() - pontosRota.get(i - 1).x(), pontosRota.get(i).y() - pontosRota.get(i - 1).y()));
             pontos.add(pontosRota.get(i));
         }
+        r = vetores.get(0);
     }
 
     /**
@@ -71,6 +74,11 @@ public class AutoPilot {
         return v.modulo() / linearSpeed;
     }
 
+    private Vetor speed(Vetor v, Vetor windSpeed, double time) {
+        return v.mult(1 / time).sub(windSpeed);
+
+    }
+
     public Ponto posicaoFinal(double linearSpeed, double totalTime) {
         Ponto f;
         double timeSeg;
@@ -99,7 +107,7 @@ public class AutoPilot {
         ArrayList<Vetor> velocidades = new ArrayList<>();
         for (int i = 0; i < vetores.size(); i++) {
             timeSeg = time(vetores.get(i), linearSpeed);
-            velocidades.add(speed(windspeed, timeSeg));
+            velocidades.add(speed(vetores.get(i), windspeed, timeSeg));
             if (totalTime < timeSeg || Math.abs(totalTime - timeSeg) < Ponto.tol) {
                 break;
             }

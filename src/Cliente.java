@@ -36,7 +36,7 @@ public class Cliente {
         for (Vetor v : velocidades) {
             IO.print(v);
         }
-
+        
     }
 
 

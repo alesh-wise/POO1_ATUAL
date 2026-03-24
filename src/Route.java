@@ -157,4 +157,9 @@ public class Route {
         }
         return velocidades;
     }
+
+    public ArrayList<Ponto> pontos() {
+        return this.pontos;
+    }
+
 }

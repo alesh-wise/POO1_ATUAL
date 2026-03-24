@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @author Alexandre Guerreiro, a88489
  */
 public class Poligono extends FiguraG {
-    private Ponto[] vertices;
+    protected Ponto[] vertices;
 
 
     /**

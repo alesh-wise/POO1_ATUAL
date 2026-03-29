@@ -1,11 +1,13 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AutoPilotTest {
 
     @Test
-    public void speed() {
+    void speed() {
         AutoPilot auto = new AutoPilot(new Ponto(3, 2), new Ponto(3, 4));
         Vetor windspeed = new Vetor(0.2, 0.2);
         double time = 5;
@@ -31,4 +33,55 @@ class AutoPilotTest {
 
         assertEquals(v_expected.y(), auto.speed(windspeed, time_expected).y(), 0.1);
     }
+
+    @Test
+    void posicaoFinal() {
+        Double[] coordenadas = {5.0, 1.0, 5.0, 5.0, 7.0, 5.0};
+        Route rota = new Route(coordenadas);
+        Ponto exp = new Ponto(5.50, 5.00);
+        AutoPilot at = new AutoPilot(rota);
+        double totaltime = 2.25;
+        double linearspeed = 2.0;
+        assertEquals(exp, at.posicaoFinal(totaltime, linearspeed));
+        coordenadas = new Double[]{1.0, 1.0, 2.0, 1.0, 2.0, 2.0, 3.0, 2.0, 3.0, 3.0, 4.0, 3.0, 4.0, 4.0, 5.0, 4.0,};
+        totaltime = 1.75;
+        exp = new Ponto(3.00, 2.50);
+        rota = new Route(coordenadas);
+        at = new AutoPilot(rota);
+        assertEquals(exp, at.posicaoFinal(totaltime, linearspeed));
+    }
+
+    @Test
+    void velocidades() {
+        Double[] coordenadas = {5.0, 1.0, 5.0, 5.0, 7.0, 5.0};
+        Route rota = new Route(coordenadas);
+        Vetor windspeed = new Vetor(1, 1);
+
+        double linearspeed = 2.0;
+        List<Vetor> velocidades = List.of(
+                new Vetor(-1, 1),
+                new Vetor(1, -1));
+
+        AutoPilot at = new AutoPilot(rota);
+        assertEquals(velocidades, at.velocidades(windspeed, linearspeed));
+        coordenadas = new Double[]{1.0, 1.0, 2.0, 1.0, 2.0, 2.0, 3.0, 2.0, 3.0, 3.0, 4.0, 3.0, 4.0, 4.0, 5.0, 4.0,};
+
+        windspeed = new Vetor(-1, 0);
+        rota = new Route(coordenadas);
+        at = new AutoPilot(rota);
+
+        velocidades = List.of(
+                new Vetor(3, 0),
+                new Vetor(1, 2),
+                new Vetor(3, 0),
+                new Vetor(1, 2),
+                new Vetor(3, 0),
+                new Vetor(1, 2),
+                new Vetor(3, 0)
+        );
+
+
+        assertEquals(velocidades, at.velocidades(windspeed, linearspeed));
+    }
+
 }

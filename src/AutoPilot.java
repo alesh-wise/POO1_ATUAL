@@ -105,16 +105,13 @@ public class AutoPilot {
     }
 
 
-    public ArrayList<Vetor> velocidades(Vetor windspeed, double totalTime, double linearSpeed) {
+    public ArrayList<Vetor> velocidades(Vetor windspeed, double linearSpeed) {
         double timeSeg;
         ArrayList<Vetor> velocidades = new ArrayList<>();
         for (int i = 0; i < vetores.size(); i++) {
             timeSeg = time(vetores.get(i), linearSpeed);
             velocidades.add(speed(vetores.get(i), windspeed, timeSeg));
-            if (totalTime < timeSeg || Math.abs(totalTime - timeSeg) < Ponto.tol) {
-                break;
-            }
-            totalTime -= timeSeg;
+
 
         }
         return velocidades;

@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class VetorTest {
 
@@ -69,5 +68,15 @@ class VetorTest {
     public void testtoString() {
         Vetor v = new Vetor(2, 2);
         assertEquals("[2.00,2.00]", v.toString());
+    }
+
+    @Test
+    public void equals() {
+        Vetor v = new Vetor(3, 3);
+        Vetor vEqual = new Vetor(v.x() + Ponto.tol / 2, v.y() + Ponto.tol / 2);
+        assertEquals(v, vEqual);
+
+        Vetor vUnequal = new Vetor(v.x() + Ponto.tol * 2, v.y() + Ponto.tol * 3);
+        assertNotEquals(v, vUnequal);
     }
 }

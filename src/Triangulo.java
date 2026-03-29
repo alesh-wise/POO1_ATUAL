@@ -4,6 +4,7 @@
  * Todos os vértices fornecidos devem formar efetivamente um triângulo não degenerado.
  *
  * @author Alexandre Guerreiro, a88489
+ * @inv vertices deve ter length ==3
  */
 public class Triangulo extends Poligono {
     /**

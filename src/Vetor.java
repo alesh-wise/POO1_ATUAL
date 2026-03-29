@@ -165,6 +165,22 @@ public class Vetor {
         return String.format(java.util.Locale.US, "[%.2f,%.2f]", x, y);
     }
 
-
+    /**
+     * Compara este vetor com o objeto especificado para verificar igualdade.
+     * Dois vetores são considerados iguais se pertencem à mesma classe e
+     * suas coordenadas x e y diferem por menos do que uma tolerância predefinida.
+     *
+     * @param o O objeto a ser comparado com este vetor.
+     * @return true se o objeto especificado for um vetor e tiver coordenadas
+     * aproximadamente iguais às coordenadas deste vetor; false, caso contrário.
+     * @pre o deve ser uma instância valida de Object
+     */
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Vetor v = (Vetor) o;
+        return (Math.abs(this.x - v.x) < Ponto.tol) && (Math.abs(this.y - v.y) < Ponto.tol);
+    }
 }
 

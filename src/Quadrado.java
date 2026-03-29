@@ -3,6 +3,7 @@
  * Ela herda de Poligono e contém validações para garantir que os vértices fornecidos formam um quadrado válido.
  *
  * @author Alexandre Guerreiro, a88489
+ * @inv vertices deve ter length ==4
  */
 public class Quadrado extends Poligono {
 

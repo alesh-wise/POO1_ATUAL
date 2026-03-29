@@ -6,6 +6,7 @@ import java.util.Arrays;
  * ordenados de forma a formar um polígono válido.
  *
  * @author Alexandre Guerreiro, a88489
+ * @inv vertices deve ter length >=3
  */
 public class Poligono extends FiguraG {
     protected Ponto[] vertices;

@@ -25,19 +25,24 @@ public class Cliente {
             coordenadas[i] = Double.parseDouble(linha[i]);
         }
         Route r = new Route(coordenadas);
-        IO.println(r.comprimento());
+        IO.println(String.format("%.2f", r.comprimento()));
         linha = br.readLine().split(" ");
         Vetor windspeed = new Vetor(new Ponto(Double.parseDouble(linha[0]), Double.parseDouble(linha[1])));
         linha = br.readLine().split(" ");
         double linearspeed = Double.parseDouble(linha[0]);
         linha = br.readLine().split(" ");
         double time = Double.parseDouble(linha[0]);
-        IO.println(r.timeRoute(linearspeed));
+        IO.println(String.format("%.2f", r.timeRoute(linearspeed)));
         Ponto pos = r.posicaoFinal(linearspeed, time);
         IO.println(pos);
-        ArrayList<Vetor> velocidades = r.speed(windspeed, time, linearspeed);
-        for (Vetor v : velocidades) {
-            IO.print(v);
+        ArrayList<Vetor> velocidades = r.speed(windspeed, linearspeed);
+        for (int i = 0; i < velocidades.size(); i++) {
+            IO.print(velocidades.get(i));
+            if (i < velocidades.size() - 1) {
+                IO.print(" ");
+            } else {
+                IO.print("\n");
+            }
         }
 
     }

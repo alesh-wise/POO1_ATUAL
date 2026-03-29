@@ -4,6 +4,7 @@
  * Esta implementação verifica se os vértices fornecidos formam um retângulo válido antes de instanciá-lo.
  *
  * @author Alexandre Guerreiro, a88489
+ * @inv vertices deve ter length ==4
  */
 public class Retangulo extends Poligono {
     /**

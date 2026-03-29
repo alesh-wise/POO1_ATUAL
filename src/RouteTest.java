@@ -9,24 +9,32 @@ class RouteTest {
 
     @Test
     void comprimento() {
-        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-        pontos.add(new Ponto(0, 1));
-        pontos.add(new Ponto(1, 1));
-        pontos.add(new Ponto(4, 4));
-        pontos.add(new Ponto(4, 3));
-        Route rota = new Route(pontos);
+        Double[] coordenadas = new Double[8];
+        coordenadas[0] = 0.0;
+        coordenadas[1] = 1.0;
+        coordenadas[2] = 1.0;
+        coordenadas[3] = 1.0;
+        coordenadas[4] = 4.0;
+        coordenadas[5] = 4.0;
+        coordenadas[6] = 4.0;
+        coordenadas[7] = 3.0;
+        Route rota = new Route(coordenadas);
         assertEquals(6.24, rota.comprimento(), 0.01);
     }
 
     @Test
     void intersectSegmentoReta() {
 
-        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-        pontos.add(new Ponto(0, 1));
-        pontos.add(new Ponto(1, 1));
-        pontos.add(new Ponto(4, 4));
-        pontos.add(new Ponto(4, 3));
-        Route rota = new Route(pontos);
+        Double[] coordenadas = new Double[8];
+        coordenadas[0] = 0.0;
+        coordenadas[1] = 1.0;
+        coordenadas[2] = 1.0;
+        coordenadas[3] = 1.0;
+        coordenadas[4] = 4.0;
+        coordenadas[5] = 4.0;
+        coordenadas[6] = 4.0;
+        coordenadas[7] = 3.0;
+        Route rota = new Route(coordenadas);
         SegmentoReta sg = new SegmentoReta(new Ponto(2, 1), new Ponto(2, 4));
         ArrayList<Ponto> expected = new ArrayList<Ponto>();
         Ponto intersect = new Ponto(2, 2);
@@ -36,12 +44,16 @@ class RouteTest {
 
     @Test
     void intersectPoligono() {
-        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-        pontos.add(new Ponto(0, 1));
-        pontos.add(new Ponto(1, 1));
-        pontos.add(new Ponto(4, 4));
-        pontos.add(new Ponto(4, 3));
-        Route rota = new Route(pontos);
+        Double[] coordenadas = new Double[8];
+        coordenadas[0] = 0.0;
+        coordenadas[1] = 1.0;
+        coordenadas[2] = 1.0;
+        coordenadas[3] = 1.0;
+        coordenadas[4] = 4.0;
+        coordenadas[5] = 4.0;
+        coordenadas[6] = 4.0;
+        coordenadas[7] = 3.0;
+        Route rota = new Route(coordenadas);
 
         Ponto[] vertices = new Ponto[4];
         vertices[1] = new Ponto(2, 4);
@@ -62,12 +74,16 @@ class RouteTest {
 
     @Test
     void intersectQuadrado() {
-        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-        pontos.add(new Ponto(0, 1));
-        pontos.add(new Ponto(1, 1));
-        pontos.add(new Ponto(4, 4));
-        pontos.add(new Ponto(4, 3));
-        Route rota = new Route(pontos);
+        Double[] coordenadas = new Double[8];
+        coordenadas[0] = 0.0;
+        coordenadas[1] = 1.0;
+        coordenadas[2] = 1.0;
+        coordenadas[3] = 1.0;
+        coordenadas[4] = 4.0;
+        coordenadas[5] = 4.0;
+        coordenadas[6] = 4.0;
+        coordenadas[7] = 3.0;
+        Route rota = new Route(coordenadas);
 
         Ponto[] vertices = new Ponto[4];
 
@@ -79,29 +95,35 @@ class RouteTest {
         ArrayList<Ponto> expected = new ArrayList<Ponto>();
         Ponto inter1 = new Ponto(2, 2);
         Ponto inter2 = new Ponto(3, 3);
+
         expected.add(inter2);
         expected.add(inter1);
         assertEquals(expected, rota.intersect(q));
 
-        Ponto longe1 = new Ponto(100, 100);
-        Ponto longe2 = new Ponto(200, 200);
-        ArrayList<Ponto> vertices2 = new ArrayList<>();
-        vertices2.add(longe1);
-        vertices2.add(longe2);
+        coordenadas = new Double[4];
+        coordenadas[0] = 100.0;
+        coordenadas[1] = 100.0;
+        coordenadas[2] = 200.0;
+        coordenadas[3] = 200.0;
 
-        Route fora = new Route(vertices2);
+        Route fora = new Route(coordenadas);
         expected = new ArrayList<>();
         assertEquals(expected, fora.intersect(q));
     }
 
     @Test
     void intersectRetangulo() {
-        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-        pontos.add(new Ponto(0, 1));
-        pontos.add(new Ponto(1, 1));
-        pontos.add(new Ponto(4, 4));
-        pontos.add(new Ponto(4, 3));
-        Route rota = new Route(pontos);
+        Double[] coordenadas = new Double[8];
+        coordenadas[0] = 0.0;
+        coordenadas[1] = 1.0;
+        coordenadas[2] = 1.0;
+        coordenadas[3] = 1.0;
+        coordenadas[4] = 4.0;
+        coordenadas[5] = 4.0;
+        coordenadas[6] = 4.0;
+        coordenadas[7] = 3.0;
+        Route rota = new Route(coordenadas);
+
         Ponto[] vertices = new Ponto[4];
         vertices[1] = new Ponto(1.5, 4.0);
         vertices[2] = new Ponto(3.5, 4.0);
@@ -116,13 +138,14 @@ class RouteTest {
         expected.add(inter2);
         assertEquals(expected, rota.intersect(r));
 
-        Ponto longe1 = new Ponto(100, 100);
-        Ponto longe2 = new Ponto(200, 200);
-        ArrayList<Ponto> vertices2 = new ArrayList<>();
-        vertices2.add(longe1);
-        vertices2.add(longe2);
 
-        Route fora = new Route(vertices2);
+        coordenadas = new Double[4];
+        coordenadas[0] = 100.0;
+        coordenadas[1] = 100.0;
+        coordenadas[2] = 200.0;
+        coordenadas[3] = 200.0;
+
+        Route fora = new Route(coordenadas);
         expected = new ArrayList<>();
         assertEquals(expected, fora.intersect(r));
 
@@ -130,12 +153,17 @@ class RouteTest {
 
     @Test
     void intersectTriangulo() {
-        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-        pontos.add(new Ponto(0, 1));
-        pontos.add(new Ponto(1, 1));
-        pontos.add(new Ponto(4, 4));
-        pontos.add(new Ponto(4, 3));
-        Route rota = new Route(pontos);
+        Double[] coordenadas = new Double[8];
+        coordenadas[0] = 0.0;
+        coordenadas[1] = 1.0;
+        coordenadas[2] = 1.0;
+        coordenadas[3] = 1.0;
+        coordenadas[4] = 4.0;
+        coordenadas[5] = 4.0;
+        coordenadas[6] = 4.0;
+        coordenadas[7] = 3.0;
+        Route rota = new Route(coordenadas);
+
 
         Ponto[] vertices = new Ponto[3];
         vertices[0] = new Ponto(2, 0);
@@ -151,13 +179,14 @@ class RouteTest {
 
         assertEquals(expected, rota.intersect(t));
 
-        Ponto longe1 = new Ponto(100, 100);
-        Ponto longe2 = new Ponto(200, 200);
-        ArrayList<Ponto> vertices2 = new ArrayList<>();
-        vertices2.add(longe1);
-        vertices2.add(longe2);
 
-        Route fora = new Route(vertices2);
+        coordenadas = new Double[4];
+        coordenadas[0] = 100.0;
+        coordenadas[1] = 100.0;
+        coordenadas[2] = 200.0;
+        coordenadas[3] = 200.0;
+
+        Route fora = new Route(coordenadas);
         expected = new ArrayList<>();
         assertEquals(expected, fora.intersect(t));
 
@@ -166,12 +195,17 @@ class RouteTest {
 
     @Test
     void intersectCirculo() {
-        ArrayList<Ponto> pontos = new ArrayList<Ponto>();
-        pontos.add(new Ponto(0, 1));
-        pontos.add(new Ponto(1, 1));
-        pontos.add(new Ponto(4, 4));
-        pontos.add(new Ponto(4, 3));
-        Route rota = new Route(pontos);
+        Double[] coordenadas = new Double[8];
+        coordenadas[0] = 0.0;
+        coordenadas[1] = 1.0;
+        coordenadas[2] = 1.0;
+        coordenadas[3] = 1.0;
+        coordenadas[4] = 4.0;
+        coordenadas[5] = 4.0;
+        coordenadas[6] = 4.0;
+        coordenadas[7] = 3.0;
+        Route rota = new Route(coordenadas);
+
 
         Circulo c = new Circulo(new Ponto(2, 3), 1);
         ArrayList<Ponto> expected = new ArrayList<Ponto>();
@@ -182,13 +216,14 @@ class RouteTest {
 
         assertEquals(expected, rota.intersect(c));
 
-        Ponto longe1 = new Ponto(100, 100);
-        Ponto longe2 = new Ponto(200, 200);
-        ArrayList<Ponto> vertices2 = new ArrayList<>();
-        vertices2.add(longe1);
-        vertices2.add(longe2);
 
-        Route fora = new Route(vertices2);
+        coordenadas = new Double[4];
+        coordenadas[0] = 100.0;
+        coordenadas[1] = 100.0;
+        coordenadas[2] = 200.0;
+        coordenadas[3] = 200.0;
+
+        Route fora = new Route(coordenadas);
         expected = new ArrayList<>();
         assertEquals(expected, fora.intersect(c));
 

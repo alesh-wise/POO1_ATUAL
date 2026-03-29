@@ -20,8 +20,11 @@ public class Cliente {
     public static void main() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] linha = br.readLine().split(" ");
-        ArrayList<Ponto> pontos = vertices(linha);
-        Route r = new Route(pontos);
+        Double[] coordenadas = new Double[linha.length];
+        for (int i = 0; i < linha.length; i++) {
+            coordenadas[i] = Double.parseDouble(linha[i]);
+        }
+        Route r = new Route(coordenadas);
         IO.println(r.comprimento());
         linha = br.readLine().split(" ");
         Vetor windspeed = new Vetor(new Ponto(Double.parseDouble(linha[0]), Double.parseDouble(linha[1])));
@@ -36,29 +39,9 @@ public class Cliente {
         for (Vetor v : velocidades) {
             IO.print(v);
         }
-        
+
     }
 
-
-    /**
-     * Converte um array de strings representando coordenadas em um array de objetos {@code Ponto}.
-     * Cada par consecutivo de strings é convertido em um ponto bidimensional no formato (x, y).
-     *
-     * @param linha Um array de strings onde cada par de elementos consecutivos representa
-     *              as coordenadas x e y de um ponto.
-     *              Deve conter um número par de elementos.
-     * @return Um array de objetos {@code Ponto}, onde cada elemento representa um ponto
-     * bidimensional criado a partir dos pares de coordenadas fornecidos como entrada.
-     * @pre uma instância valida do tipo String[]
-     * @post retorna uma nova instância valida do tipo Ponto[]
-     */
-    public static ArrayList<Ponto> vertices(String[] linha) {
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < linha.length; i += 2) {
-            pontos.add(new Ponto(Double.parseDouble(linha[i]), Double.parseDouble(linha[i + 1])));
-        }
-        return pontos;
-    }
 
     /**
      * Imprime a lista de pontos no formato especificado.

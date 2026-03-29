@@ -12,16 +12,16 @@ public class Route {
 
     private ArrayList<Ponto> pontos;
 
-    /**
-     * Constrói uma nova instância da classe Route com uma lista de pontos especificada.
-     *
-     * @param pontos Uma lista de objetos {@code Ponto} que representam os pontos sequenciais
-     *               que compõem a rota.
-     * @pre ArrayList pontos com size >=2
-     * @post this.pontos passa a ser igual ao ArrayList pontos
-     */
-    Route(ArrayList<Ponto> pontos) {
-        this.pontos = pontos;
+
+    Route(Double[] coordenadas) {
+        if (coordenadas.length % 2 != 0) {
+            IO.println("Rota.iv");
+            System.exit(0);
+        }
+        this.pontos = new ArrayList<>();
+        for (int i = 1; i < coordenadas.length; i += 2) {
+            pontos.add(new Ponto(coordenadas[i - 1], coordenadas[i]));
+        }
     }
 
 

@@ -172,6 +172,22 @@ public class SegmentoReta extends FiguraG {
         return this.intersect(segv);
     }
 
+    /**
+     * Calcula os pontos de interseção entre o segmento de reta atual e um círculo fornecido.
+     * <p>
+     * Este método utiliza as equações paramétricas do segmento de reta e do círculo
+     * para determinar os possíveis pontos de interseção. Ele verifica se o discriminante da
+     * equação quadrática formada é positivo, zero ou negativo, retornando os pontos de interseção
+     * correspondentes caso existam.
+     *
+     * @param circle O círculo com o qual a interseção será calculada.
+     *               Deve ser uma instância válida da classe {@code Circulo}.
+     * @return Uma {@code ArrayList} contendo os pontos de interseção. A lista
+     * pode conter até dois objetos {@code Ponto}, dependendo do número
+     * de interseções, ou estar vazia caso não existam interseções.
+     * @pre circle deve ser uma instância válida da classe {@code Circulo}.
+     * @see <a href ="https://stackoverflow.com/questions/1073336/circle-line-segment-collision-detection-algorithm"></a>
+     */
     public ArrayList<Ponto> intersect(Circulo circle) {
         ArrayList<Ponto> intersecoes = new ArrayList<>();
 

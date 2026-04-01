@@ -174,6 +174,7 @@ public class Route {
         return f;
     }
 
+
     /**
      * Calcula as velocidades de movimento entre pontos consecutivos na rota,
      * considerando a influência do vento, tempo total e uma velocidade linear especificada.

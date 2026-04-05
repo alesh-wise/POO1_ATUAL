@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * verificar se um ponto está contido nele, ou determinar pontos de interseção com vetores.
  *
  * @author Alexandre Guerreiro, 88489
- * @version 12/02/2026
+ * @version 05/04/2026
  * @inv as coordenadas dos pontos devem ser maiores que 0
  */
 public class SegmentoReta extends FiguraG {
@@ -34,16 +34,17 @@ public class SegmentoReta extends FiguraG {
     }
 
     /**
-     * Constrói um segmento de reta utilizando dois pontos.
-     * O segmento é definido pelas coordenadas dos pontos fornecidos,
-     * o ponto inicial {@code p1} e o ponto final {@code p2}.
+     * Constrói um segmento de reta definido por dois pontos distintos.
      *
      * @param p1 O ponto inicial do segmento de reta.
      * @param p2 O ponto final do segmento de reta.
-     * @pre p1 e p2 devem ser instância validas do tipo Ponto e diferentes
-     * @post this.p1 passa a ser igual ao Ponto p1
-     * @post this.v1 passa a ser igual a p1
-     * @post this.p2 passa a ser igual a p1 + v1
+     * @pre Os pontos p1 e p2 devem ser instâncias válidas da classe Ponto.
+     * @pre Os pontos p1 e p2 devem ser distintos para que o segmento de reta
+     * seja válido.
+     * @post this.p1 será igual ao ponto p1.
+     * @post this.p2 será igual ao ponto p2.
+     * @post O método {@code check()} será invocado para verificar a validade
+     * do segmento de reta.
      */
     SegmentoReta(Ponto p1, Ponto p2) {
         this.p1 = p1;
@@ -88,7 +89,7 @@ public class SegmentoReta extends FiguraG {
      *
      * @param p O ponto a ser verificado.
      * @return true se o ponto estiver dentro do segmento de reta, false caso contrário.
-     * @pre p deve ser uma instância valida do tipo Ponto
+     * @pre {@code p} deve ser uma instância valida do tipo {@code Ponto}
      */
     public boolean noSegmento(Ponto p) {
         Ponto r = p2.subtracao(p1);
@@ -115,7 +116,7 @@ public class SegmentoReta extends FiguraG {
      *             Deve ser uma instância válida de {@code SegmentoReta}.
      * @return O {@code Ponto} correspondente ao ponto de interseção, se existir.
      * Retorna {@code null} se não houver interseção ou se os segmentos forem paralelos sem sobreposição.
-     * @pre segv deve ser uma instância válida de SegmentoReta.
+     * @pre {@code segv} deve ser uma instância válida de {@code SegmentoReta}.
      */
     public Ponto intersect(SegmentoReta segv) {
         Ponto r = p2.subtracao(p1);
@@ -165,7 +166,7 @@ public class SegmentoReta extends FiguraG {
      * @param v O vetor usado para calcular a interseção com o segmento de reta atual.
      * @return O {@code Ponto} representando o ponto de interseção, se existir.
      * Retorna {@code null} caso não exista interseção.
-     * @pre v deve ser uma instância valida de vetor
+     * @pre {@code v} deve ser uma instância valida de {@code Vetor}
      */
     public Ponto intersect(Vetor v) {
         SegmentoReta segv = new SegmentoReta(new Ponto(0, 0), v);
@@ -185,7 +186,7 @@ public class SegmentoReta extends FiguraG {
      * @return Uma {@code ArrayList} contendo os pontos de interseção. A lista
      * pode conter até dois objetos {@code Ponto}, dependendo do número
      * de interseções, ou estar vazia caso não existam interseções.
-     * @pre circle deve ser uma instância válida da classe {@code Circulo}.
+     * @pre {@code circle} deve ser uma instância válida da classe {@code Circulo}.
      * @see <a href ="https://stackoverflow.com/questions/1073336/circle-line-segment-collision-detection-algorithm"></a>
      */
     public ArrayList<Ponto> intersect(Circulo circle) {

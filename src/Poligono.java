@@ -6,17 +6,18 @@ import java.util.Arrays;
  * ordenados de forma a formar um polígono válido.
  *
  * @author Alexandre Guerreiro, a88489
- * @inv vertices deve ter length >=3
+ * @version 05/04/2026
+ * @inv {@code vertices} deve ter length >=3
  */
 public class Poligono extends FiguraG {
     protected Ponto[] vertices;
 
 
     /**
-     * Constrói um polígono representado por uma lista de vértices.
+     * Constrói um polígono representado por um conjunto de vértices.
      *
-     * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do polígono.
-     * @pre os pontos do ArrayList vertices devem estar ordenados para formar o poligono
+     * @param vertices Um array de objetos do tipo {@code Ponto} que representam os vértices do polígono.
+     * @pre os pontos do array de vertices devem estar ordenados para formar o poligono
      * @post this.vertices passa a ser igual ao array vertices
      */
     Poligono(Ponto[] vertices) {

@@ -4,7 +4,8 @@
  * Esta implementação verifica se os vértices fornecidos formam um retângulo válido antes de instanciá-lo.
  *
  * @author Alexandre Guerreiro, a88489
- * @inv vertices deve ter length ==4
+ * @version 05/04/2026
+ * @inv vertices deve ter length == 4
  */
 public class Retangulo extends Poligono {
     /**
@@ -13,9 +14,8 @@ public class Retangulo extends Poligono {
      *
      * @param vertices Um array de objetos do tipo {@code Ponto} que representam os
      *                 vértices do retângulo. O array deve conter exatamente 4 elementos.
-     * @pre os pontos devem estar ordenados
-     * @post this.vertices passa a ser igual ao array vertices
-     * @inv pontos deve ter size =4
+     * @pre {@code vertices} deve ser uma instância valida de {@code Ponto[]} e devem estar ordenados.
+     * @post this.vertices passa a ser igual ao array {@code vertices}
      */
     Retangulo(Ponto[] vertices) {
 

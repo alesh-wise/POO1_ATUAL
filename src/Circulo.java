@@ -7,13 +7,14 @@
  * A classe herda de FiguraG, podendo usufruir de conceitos gerais de figuras geométricas.
  *
  * @author Alexandre Guerreiro, a88489
+ * @version 05/04/2026
  */
 public class Circulo extends FiguraG {
     private Ponto centro;
     private double raio;
 
     /**
-     * Construtor que inicializa um círculo com um ponto central e um raio especificados.
+     * Construtor que inicializa um círculo com um ponto central e um raio especificado.
      *
      * @param centro O ponto que representa o centro do círculo.
      * @param raio   O valor do raio do círculo, representando a distância entre o centro
@@ -31,7 +32,7 @@ public class Circulo extends FiguraG {
     }
 
     /**
-     * Retorna o ponto central do círculo.
+     * Retorna o centro do círculo.
      *
      * @return O ponto que representa o centro do círculo.
      */

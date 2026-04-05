@@ -3,7 +3,8 @@
  * Ela herda de Poligono e contém validações para garantir que os vértices fornecidos formam um quadrado válido.
  *
  * @author Alexandre Guerreiro, a88489
- * @inv vertices deve ter length ==4
+ * @version 05/04/2026
+ * @inv {@code vertices} deve ter length == 4
  */
 public class Quadrado extends Poligono {
 
@@ -13,9 +14,8 @@ public class Quadrado extends Poligono {
      * Inicializa o quadrado com base numa lista de vértices fornecida.
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do quadrado.
-     * @pre os pontos devem estar ordenados
-     * @post this.vertices passa a ser igual ao array vertices
-     * @inv pontos deve ter size =4
+     * @pre {@code vertices} deve ser uma instância valida de {@code Ponto[]} e os seus elementos devem estar ordenados
+     * @post this.vertices passa a ser igual ao array {@code vertices}
      *
      */
     Quadrado(Ponto[] vertices) {

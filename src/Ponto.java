@@ -4,7 +4,7 @@
  * do ponto, como obtenção de valores, cálculo de distância, comparação e operações matemáticas.
  *
  * @author Alexandre Guerreiro, 88489
- * @version 10/03/2026
+ * @version 05/04/2026
  */
 public class Ponto {
     public static final double tol = 1e-9;
@@ -15,7 +15,7 @@ public class Ponto {
      *
      * @param x Coordenada x do ponto.
      * @param y Coordenada y do ponto.
-     * @post this.x passa a ser igual x e this.y passa a ser igual ao y
+     * @post this.x igual a {@code x} e this.y igual a {@code y}
      *
      */
     Ponto(double x, double y) {
@@ -57,7 +57,7 @@ public class Ponto {
      *
      * @param that O ponto até o qual a distância será calculada.
      * @return A distância entre este ponto e o ponto that especificado.
-     * @pre that deve ser uma instância valida de Ponto (that != null).
+     * @pre {@code that} deve ser uma instância valida de {@code Ponto}
      */
     public double distance_to(Ponto that) {
         return Math.sqrt(Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2));
@@ -86,7 +86,7 @@ public class Ponto {
      *
      * @param p2 o ponto cujas coordenadas serão subtraídas.
      * @return uma nova instância de {@code Ponto} com o resultado da subtração.
-     * @pre p2 deve ser uma instância valida do tipo Ponto.
+     * @pre {@code p2} deve ser uma instância valida do tipo {@code Ponto}.
      */
     public Ponto subtracao(Ponto p2) {
         return new Ponto(this.x() - p2.x(), this.y() - p2.y());
@@ -99,7 +99,7 @@ public class Ponto {
      *
      * @param p2 O ponto com o qual o produto vetorial será calculado.
      * @return O resultado do produto vetorial entre o ponto atual e o ponto fornecido.
-     * @pre p2 deve ser uma instância valida do tipo Ponto.
+     * @pre {@code p2} deve ser uma instância valida do tipo {@code Ponto}.
      */
     public double produtoVetorial(Ponto p2) {
         return this.x * p2.y() - this.y * p2.x();

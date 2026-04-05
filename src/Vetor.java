@@ -7,7 +7,7 @@
  * terminado imediatamente.
  *
  * @author Alexandre Guerreiro, 88489
- * @version 12/02/2026
+ * @version 05/04/2026
  */
 public class Vetor {
 
@@ -38,7 +38,7 @@ public class Vetor {
      * O ponto fornecido determina as coordenadas x e y do vetor.
      *
      * @param that O ponto de onde as coordenadas x e y serão atribuídas ao vetor.
-     * @pre that deve ser uma instância valida de Ponto
+     * @pre {@code that} deve ser uma instância valida de {@code Ponto}.
      */
 
     Vetor(Ponto that) {
@@ -86,7 +86,7 @@ public class Vetor {
      *
      * @param b O vetor com o qual o produto interno será calculado.
      * @return O valor do produto interno como um número real.
-     * @pre b deve ser uma instância valida do tipo Vetor.
+     * @pre {@code b} deve ser uma instância valida do tipo {@code Vetor}.
      */
 
     public double p_interno(Vetor b) {
@@ -100,7 +100,7 @@ public class Vetor {
      *
      * @param b O vetor com o qual o cosseno do ângulo será calculado.
      * @return O valor do cosseno do ângulo entre os dois vetores como um número real.
-     * @pre b deve ser uma instância valida do tipo Vetor.
+     * @pre {@code b} deve ser uma instância valida do tipo {@code Vetor}.
      */
     public double cossine(Vetor b) {
         return this.p_interno(b) / (this.modulo() * b.modulo());
@@ -113,7 +113,7 @@ public class Vetor {
      * @return Um objeto do tipo {@code Ponto} representando o ponto de interseção
      * entre o vetor e o segmento de reta fornecidos, ou {@code null} caso
      * não haja interseção.
-     * @pre v deve ser uma instância valida do tipo SegmentoReta
+     * @pre {@code v} deve ser uma instância valida do tipo {@code SegmentoReta}.
      */
     public Ponto intersect(SegmentoReta v) {
         return v.intersect(this);
@@ -136,7 +136,7 @@ public class Vetor {
      *
      * @param v O vetor a ser adicionado ao vetor atual.
      * @return Um novo objeto {@code Vetor} representando a soma do vetor atual e do vetor v
-     * @pre v deve ser uma instância valida do tipo Vetor
+     * @pre {@code v} deve ser uma instância valida do tipo {@code Vetor}.
      */
     public Vetor add(Vetor v) {
         return new Vetor(this.x + v.x, this.y + v.y);
@@ -148,7 +148,7 @@ public class Vetor {
      * @param v O vetor a ser subtraído do vetor atual.
      * @return Um novo objeto {@code Vetor} representando o resultado da subtração
      * das coordenadas do vetor atual e do vetor fornecido.
-     * @pre v deve ser uma instância valida do tipo Vetor
+     * @pre {@code v} deve ser uma instância valida do tipo {@code Vetor}
      */
     public Vetor sub(Vetor v) {
         return new Vetor(this.x - v.x, this.y - v.y);
@@ -173,7 +173,7 @@ public class Vetor {
      * @param o O objeto a ser comparado com este vetor.
      * @return true se o objeto especificado for um vetor e tiver coordenadas
      * aproximadamente iguais às coordenadas deste vetor; false, caso contrário.
-     * @pre o deve ser uma instância valida de Object
+     * @pre {@code o} deve ser uma instância valida de {@code Object}
      */
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {

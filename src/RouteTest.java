@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -156,64 +155,5 @@ class RouteTest {
         expected = new ArrayList<>();
         assertEquals(expected, fora.intersect(c));
 
-    }
-
-    @Test
-    void timeRoute() {
-        Double[] coordenadas = {5.0, 1.0, 5.0, 5.0, 7.0, 5.0};
-        Route rota = new Route(coordenadas);
-        double exp = 3.0;
-        double linearspeed = 2.0;
-        assertEquals(exp, rota.timeRoute(linearspeed));
-        coordenadas = new Double[]{1.0, 1.0, 2.0, 1.0, 2.0, 2.0, 3.0, 2.0, 3.0, 3.0, 4.0, 3.0, 4.0, 4.0, 5.0, 4.0,};
-        rota = new Route(coordenadas);
-        exp = 3.5;
-        assertEquals(exp, rota.timeRoute(linearspeed));
-    }
-
-    @Test
-    void posicaoFinal() {
-        Double[] coordenadas = {5.0, 1.0, 5.0, 5.0, 7.0, 5.0};
-        Route rota = new Route(coordenadas);
-        Ponto exp = new Ponto(5.50, 5.00);
-        double totaltime = 2.25;
-        double linearspeed = 2.0;
-        assertEquals(exp, rota.posicaoFinal(totaltime, linearspeed));
-        coordenadas = new Double[]{1.0, 1.0, 2.0, 1.0, 2.0, 2.0, 3.0, 2.0, 3.0, 3.0, 4.0, 3.0, 4.0, 4.0, 5.0, 4.0,};
-        totaltime = 1.75;
-        exp = new Ponto(3.00, 2.50);
-        rota = new Route(coordenadas);
-        assertEquals(exp, rota.posicaoFinal(totaltime, linearspeed));
-    }
-
-    @Test
-    void speed() {
-        Double[] coordenadas = {5.0, 1.0, 5.0, 5.0, 7.0, 5.0};
-        Route rota = new Route(coordenadas);
-        Vetor windspeed = new Vetor(1, 1);
-
-        double linearspeed = 2.0;
-        List<Vetor> velocidades = List.of(
-                new Vetor(-1, 1),
-                new Vetor(1, -1));
-
-        assertEquals(velocidades, rota.speed(windspeed, linearspeed));
-        coordenadas = new Double[]{1.0, 1.0, 2.0, 1.0, 2.0, 2.0, 3.0, 2.0, 3.0, 3.0, 4.0, 3.0, 4.0, 4.0, 5.0, 4.0,};
-
-        windspeed = new Vetor(-1, 0);
-        rota = new Route(coordenadas);
-
-        velocidades = List.of(
-                new Vetor(3, 0),
-                new Vetor(1, 2),
-                new Vetor(3, 0),
-                new Vetor(1, 2),
-                new Vetor(3, 0),
-                new Vetor(1, 2),
-                new Vetor(3, 0)
-        );
-
-
-        assertEquals(velocidades, rota.speed(windspeed, linearspeed));
     }
 }

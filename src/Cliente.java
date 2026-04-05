@@ -25,6 +25,7 @@ public class Cliente {
             coordenadas[i] = Double.parseDouble(linha[i]);
         }
         Route r = new Route(coordenadas);
+        AutoPilot at = new AutoPilot(r);
         IO.println(String.format("%.2f", r.comprimento()));
         linha = br.readLine().split(" ");
         Vetor windspeed = new Vetor(new Ponto(Double.parseDouble(linha[0]), Double.parseDouble(linha[1])));
@@ -32,10 +33,10 @@ public class Cliente {
         double linearspeed = Double.parseDouble(linha[0]);
         linha = br.readLine().split(" ");
         double time = Double.parseDouble(linha[0]);
-        IO.println(String.format("%.2f", r.timeRoute(linearspeed)));
-        Ponto pos = r.posicaoFinal(linearspeed, time);
+        IO.println(String.format("%.2f", at.time(linearspeed)));
+        Ponto pos = at.posicaoFinal(linearspeed, time);
         IO.println(pos);
-        ArrayList<Vetor> velocidades = r.speed(windspeed, linearspeed);
+        ArrayList<Vetor> velocidades = at.velocidades(windspeed, linearspeed);
         for (int i = 0; i < velocidades.size(); i++) {
             IO.print(velocidades.get(i));
             if (i < velocidades.size() - 1) {

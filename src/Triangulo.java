@@ -4,6 +4,7 @@
  * Todos os vértices fornecidos devem formar efetivamente um triângulo não degenerado.
  *
  * @author Alexandre Guerreiro, a88489
+ * @version 05/04/2026
  * @inv vertices deve ter length ==3
  */
 public class Triangulo extends Poligono {
@@ -12,7 +13,6 @@ public class Triangulo extends Poligono {
      * Inicializa o triangulo com base numa lista de vértices fornecida.
      *
      * @param vertices Uma lista de objetos do tipo {@code Ponto} que representam os vértices do quadrado.
-     * @inv pontos deve ter size =3
      * @pre os pontos devem estar ordenados
      * @post this.vertices passa a ser igual ao array vertices
      */
